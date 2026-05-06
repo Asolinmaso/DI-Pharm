@@ -7,57 +7,57 @@ gsap.registerPlugin(MotionPathPlugin);
 
 const pins = [
   {
-    year: "2023",
+    year: "2012",
     title: "Di Pharma",
-    align: "left",
+    align: "right",
     position: 0.92,
   },
   {
-    year: "2023",
-    title: "IndoContinental 7",
+    year: "2014",
+    title: "indocontinental7",
     align: "right",
     position: 0.82,
   },
   {
-    year: "2024",
-    title: "MJ7",
+    year: "2025",
+    title: "Di polyclinic & Hospitals",
     align: "left",
     position: 0.71,
   },
   {
     year: "2025",
-    title: "Di polyclinic",
+    title: "Di Wholesale",
     align: "right",
     position: 0.61,
   },
   {
     year: "2025",
-    title: "Di Wholesale",
+    title: "Di Research",
     align: "left",
     position: 0.50,
   },
   {
     year: "2026",
-    title: "Di Laboratories",
+    title: "Di Diagnostics",
     align: "right",
     position: 0.40,
   },
   {
-    year: "coming soon",
+    year: "Coming Soon",
     title: "Dr. Will",
-    align: "right",
+    align: "left",
     position: 0.26,
   },
   {
-    year: "coming soon",
+    year: "Coming Soon",
     title: "Di Research",
     align: "right",
     position: 0.16,
   },
   {
-    year: "coming soon",
-    title: "Grandis 7",
-    align: "right",
+    year: "Coming Soon",
+    title: "Di laboratories",
+    align: "left",
     position: 0.07,
   },
 ];
@@ -82,16 +82,15 @@ function RoadPin({ refProp, year, title }) {
 
       const maxTextWidth = Math.max(titleWidth, yearWidth);
 
-      const extraWidth = title === "MJ7" ? 38 : 0;
-      setBoxWidth(maxTextWidth + PADDING_X * 2 + extraWidth);
+      setBoxWidth(maxTextWidth + PADDING_X * 2);
     }
   }, [title, year]);
 
   return (
     <g ref={(el) => {
-        refProp(el);
-        groupRef.current = el;
-      }}
+      refProp(el);
+      groupRef.current = el;
+    }}
       opacity="0.35"
     >
       {/* PIN ICON */}
@@ -103,34 +102,34 @@ function RoadPin({ refProp, year, title }) {
 
       {/* LABEL BELOW PIN */}
       <g
-  transform={`translate(${12 - boxWidth / 2}, 38)`}
->
-  <rect
-    width={boxWidth}
-    height={title === "MJ7" ? 60 : 54}
-    rx="10"
-    fill="#D7D7ED"
-  />
+        transform={`translate(${12 - boxWidth / 2}, 38)`}
+      >
+        <rect
+          width={boxWidth}
+          height={54}
+          rx="10"
+          fill="#D7D7ED"
+        />
 
-  <text
-    ref={yearRef}
-    x={PADDING_X}
-    y={title === "MJ7" ? 26 : 22}
-    fontSize="11"
-    fontWeight="600"
-  >
-    {year}
-  </text>
+        <text
+          ref={yearRef}
+          x={PADDING_X}
+          y={22}
+          fontSize="11"
+          fontWeight="600"
+        >
+          {year}
+        </text>
 
-  <text
-    ref={titleRef}
-    x={PADDING_X}
-    y={title === "MJ7" ? 46 : 40}
-    fontSize="12"
-  >
-    {title}
-  </text>
-</g>
+        <text
+          ref={titleRef}
+          x={PADDING_X}
+          y={40}
+          fontSize="12"
+        >
+          {title}
+        </text>
+      </g>
     </g>
   );
 }
@@ -165,10 +164,10 @@ export default function FlightTimeline() {
   };
 
   const DESKTOP_PATH =
-  "M -10 400 C 300 450, 550 100, 800 8 S 1000 -40, 1450 -40";
+    "M -10 400 C 300 450, 550 100, 800 8 S 1000 -40, 1450 -40";
 
-const MOBILE_PATH =
-  "M -10 600 C 300 590, 550 200, 690 10 S 1000 -90, 1250 -170";
+  const MOBILE_PATH =
+    "M -10 600 C 300 590, 550 200, 690 10 S 1000 -90, 1250 -170";
 
   const DESKTOP_DASH_PATH =
     "M 0 400 C 300 450, 550 100, 800 10 S 1000 -40, 1450 -40";
@@ -188,88 +187,88 @@ const MOBILE_PATH =
   }
 
   useEffect(() => {
-  if (!planeRef.current || !pinRefs.current.length) return;
+    if (!planeRef.current || !pinRefs.current.length) return;
 
-  // =========================
-  // PLACE PINS ON PATH
-  // =========================
-  pins.forEach((pin, index) => {
-    gsap.set(pinRefs.current[index], {
+    // =========================
+    // PLACE PINS ON PATH
+    // =========================
+    pins.forEach((pin, index) => {
+      gsap.set(pinRefs.current[index], {
+        motionPath: {
+          path: "#road-path",
+          align: "#road-path",
+          alignOrigin: [0.5, 0.15],
+          start: pin.position,
+          end: pin.position,
+        },
+      });
+
+      // ensure all start inactive
+      activatePin(pinRefs.current[index], false);
+    });
+
+    const FLIGHT_START = 1;
+    const FLIGHT_END = 0.3;
+    const TOTAL_DURATION = 6;
+
+    // Track activation state (cleaner than dataset)
+    let activatedPins = new Array(pins.length).fill(false);
+
+    const tl = gsap.timeline({ paused: true });
+
+    tl.to(planeRef.current, {
+      duration: TOTAL_DURATION,
+      ease: "power2.inOut",
       motionPath: {
         path: "#road-path",
         align: "#road-path",
-        alignOrigin: [0.5, 0.15],
-        start: pin.position,
-        end: pin.position,
+        autoRotate: -130,
+        alignOrigin: [0.5, 0.5],
+        start: FLIGHT_START,
+        end: FLIGHT_END,
+      },
+      onUpdate: function () {
+        const planeX = planeRef.current.getCTM().e;
+
+        pins.forEach((pin, index) => {
+          const pinX = pinRefs.current[index].getCTM().e;
+
+          // Since plane moves right → left
+          if (!activatedPins[index] && planeX <= pinX) {
+            activatePin(pinRefs.current[index], true);
+            activatedPins[index] = true;
+          }
+        });
       },
     });
 
-    // ensure all start inactive
-    activatePin(pinRefs.current[index], false);
-  });
+    timelineRef.current = tl;
 
-  const FLIGHT_START = 1;
-  const FLIGHT_END = 0.3;
-  const TOTAL_DURATION = 6;
+    // =========================
+    // INTERSECTION OBSERVER
+    // =========================
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          tl.restart();
+        } else {
+          tl.pause(0);
 
-  // Track activation state (cleaner than dataset)
-  let activatedPins = new Array(pins.length).fill(false);
+          // Reset all pins when leaving section
+          activatedPins.fill(false);
 
-  const tl = gsap.timeline({ paused: true });
+          pinRefs.current.forEach((pinEl) => {
+            activatePin(pinEl, false);
+          });
+        }
+      },
+      { threshold: 0.4 }
+    );
 
-  tl.to(planeRef.current, {
-    duration: TOTAL_DURATION,
-    ease: "power2.inOut",
-    motionPath: {
-      path: "#road-path",
-      align: "#road-path",
-      autoRotate: -130,
-      alignOrigin: [0.5, 0.5],
-      start: FLIGHT_START,
-      end: FLIGHT_END,
-    },
-    onUpdate: function () {
-  const planeX = planeRef.current.getCTM().e;
+    observer.observe(sectionRef.current);
 
-  pins.forEach((pin, index) => {
-    const pinX = pinRefs.current[index].getCTM().e;
-
-    // Since plane moves right → left
-    if (!activatedPins[index] && planeX <= pinX) {
-      activatePin(pinRefs.current[index], true);
-      activatedPins[index] = true;
-    }
-  });
-},
-  });
-
-  timelineRef.current = tl;
-
-  // =========================
-  // INTERSECTION OBSERVER
-  // =========================
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        tl.restart();
-      } else {
-        tl.pause(0);
-
-        // Reset all pins when leaving section
-        activatedPins.fill(false);
-
-        pinRefs.current.forEach((pinEl) => {
-          activatePin(pinEl, false);
-        });
-      }
-    },
-    { threshold: 0.4 }
-  );
-
-  observer.observe(sectionRef.current);
-
-  return () => observer.disconnect();
-}, []);
+    return () => observer.disconnect();
+  }, []);
 
 
   const isMobile = useIsMobile();

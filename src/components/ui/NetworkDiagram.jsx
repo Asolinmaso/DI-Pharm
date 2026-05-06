@@ -22,7 +22,7 @@ export default function NetworkDiagram() {
           <path className="base-line" d="M510 320 L390 230" />
           <path className="flow center-out" d="M510 320 L390 230" />
 
-          {/* LEFT Top BLUE to center white */}
+          {/* center to RIGHT Top BLUE (Di Research) */}
           <path className="base-line" d="M500 120 L390 200" />
           <path className="flow center-out" d="M500 120 L390 200" />
 
@@ -105,6 +105,34 @@ export default function NetworkDiagram() {
           </button>
         </div>
 
+        <div className="server-wrap ct">
+          <img src={blue} className="server blue" alt="" />
+          <button className="server-btn">
+            <span className="btn-text">Di hospitals</span>
+            <span className="btn-arrow">
+              <svg width="26" height="18" viewBox="0 0 66 43">
+                <g fill="none">
+                  <path
+                    className="one"
+                    d="M40.15 3.89L44 0.14 65.7 20.78 44 42.86 40.15 39.1 57 21.85z"
+                    fill="#000"
+                  />
+                  <path
+                    className="two"
+                    d="M20.15 3.89L24 0.14 45.7 20.78 24 42.86 20.15 39.1 37 21.85z"
+                    fill="#000"
+                  />
+                  <path
+                    className="three"
+                    d="M0.15 3.89L4 0.14 25.7 20.78 4 42.86 0.15 39.1 17 21.85z"
+                    fill="#000"
+                  />
+                </g>
+              </svg>
+            </span>
+          </button>
+        </div>
+
         <div className="server-wrap lb">
           <img src={blue} className="server blue" alt="" />
           <button className="server-btn">
@@ -136,7 +164,7 @@ export default function NetworkDiagram() {
         <div className="server-wrap rb">
           <img src={blue} className="server blue" alt="" />
           <button className="server-btn">
-            <span className="btn-text">MJ 7</span>
+            <span className="btn-text">Di scans</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
                 <g fill="none">
@@ -165,7 +193,7 @@ export default function NetworkDiagram() {
         <div className="server-wrap wl">
           <img src={white} className="server white" alt="" />
           <button className="server-btn">
-            <span className="btn-text">Indo Continental 7</span>
+            <span className="btn-text">Indo Continental</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
                 <g fill="none">
@@ -193,7 +221,35 @@ export default function NetworkDiagram() {
         <div className="server-wrap wr">
           <img src={white} className="server white" alt="" />
           <button className="server-btn">
-            <span className="btn-text">Grandis7</span>
+            <span className="btn-text">Di laboratories</span>
+            <span className="btn-arrow">
+              <svg width="26" height="18" viewBox="0 0 66 43">
+                <g fill="none">
+                  <path
+                    className="one"
+                    d="M40.15 3.89L44 0.14 65.7 20.78 44 42.86 40.15 39.1 57 21.85z"
+                    fill="#000"
+                  />
+                  <path
+                    className="two"
+                    d="M20.15 3.89L24 0.14 45.7 20.78 24 42.86 20.15 39.1 37 21.85z"
+                    fill="#000"
+                  />
+                  <path
+                    className="three"
+                    d="M0.15 3.89L4 0.14 25.7 20.78 4 42.86 0.15 39.1 17 21.85z"
+                    fill="#000"
+                  />
+                </g>
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <div className="server-wrap cb">
+          <img src={white} className="server white" alt="" />
+          <button className="server-btn">
+            <span className="btn-text">Di polyclinics</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
                 <g fill="none">

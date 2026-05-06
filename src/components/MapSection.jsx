@@ -13,6 +13,7 @@ const MapSection = () => {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           title="DI PHARMA Location Map"
+          allow="storage-access"
         ></iframe>
       </div>
     </section>

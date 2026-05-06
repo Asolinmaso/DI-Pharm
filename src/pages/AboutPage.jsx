@@ -10,131 +10,22 @@ import seniorManager1 from "../assets/about/director.jpeg";
 import seniorManager2 from "../assets/about/general_Manager.jpeg";
 import { useEffect, useRef, useState } from "react";
 import FlightTimeline from "../components/FlightTimeline";
-import sudha from "../assets/about/sudha.jpeg";
-import uma from "../assets/about/Uma.jpeg";
-import Magesh from "../assets/about/Magesh.jpeg";
-import nikhila from "../assets/about/nikhila.jpeg";
-import Paulweshly from "../assets/about/PAULWESHLY.jpeg";
-import raghul from "../assets/about/raghul.jpeg";
-import santhosh from "../assets/about/santhosh.jpeg";
-import devika from "../assets/about/devika.jpeg";
+
 
 const AboutPage = () => {
-  const teamMembers = [
-    {
-      img: magaeshImage,
-      name: "Dr. Jefry Wilson",
-      role: "Managing Director",
-    },
-    {
-      img: seniorManager1,
-      name: "Dr. Arjun",
-      role: "Director",
-    },
-
-  ];
-
   const sectionRef = useRef(null);
-  const teamRef = useRef(null);
   const commitmentRef = useRef(null);
   const missionRef = useRef(null);
   const visionRef = useRef(null);
-
-  const trackRef = useRef(null);
-
-  // const CARD_GAP = 28; // same as CSS gap
-  // const CARD_WIDTH = 250 + CARD_GAP; // card + gap
-  const total = teamMembers.length;
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isTransitionEnabled, setIsTransitionEnabled] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
-  const [cardWidth, setCardWidth] = useState(0);
-
-  /* =========================
-     GET CARD WIDTH FROM CSS
-  ========================= */
-  const getCardWidth = () => {
-    const styles = getComputedStyle(document.documentElement);
-    const width = parseFloat(styles.getPropertyValue("--team-card-width"));
-    const gap = parseFloat(styles.getPropertyValue("--team-card-gap"));
-    return width + gap;
-  };
- useEffect(() => {
-    setCardWidth(getCardWidth());
-
-    const onResize = () => setCardWidth(getCardWidth());
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-  /* =========================
-     AUTO SLIDE
-  ========================= */
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
-      setActiveIndex((prev) => (prev + 1) % total);
-    }, 2500);
-
-    return () => clearInterval(interval);
-  }, [isPaused, total]);
-
-  /* =========================
-     SILENT RESET (NO JUMP)
-  ========================= */
-  useEffect(() => {
-    if (currentIndex === total) {
-      const timer = setTimeout(() => {
-        setIsTransitionEnabled(false);
-        setCurrentIndex(0);
-
-        requestAnimationFrame(() => {
-          setIsTransitionEnabled(true);
-        });
-      }, 800); // must match transition duration
-      return () => clearTimeout(timer);
-    }
-  }, [currentIndex, total]);
-
-  /* =========================
-     TEAM VISIBILITY ANIMATION
-  ========================= */
-  useEffect(() => {
-    if (!teamRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        teamRef.current.classList.toggle("team-visible", entry.isIntersecting);
-      },
-      { threshold: 0.3 },
-    );
-
-    observer.observe(teamRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  // useEffect(() => {
-  //   const isMobile = window.innerWidth < 767;
-  //   if (!isMobile || isPaused) return;
-
-  //   const interval = setInterval(() => {
-  //     setActiveTeamIndex((prev) => (prev + 1) % 3);
-  //   }, 2500);
-
-  //   return () => clearInterval(interval);
-  // }, [isPaused]);
+  const founderRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          sectionRef.current.classList.add("about-visible");
+          entry.target.classList.add("about-visible");
         } else {
-          sectionRef.current.classList.remove("about-visible");
+          entry.target.classList.remove("about-visible");
         }
       },
       {
@@ -149,27 +40,8 @@ const AboutPage = () => {
     return () => observer.disconnect();
   }, []);
 
-  //for team section animation
-  useEffect(() => {
-    if (!teamRef.current) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          teamRef.current.classList.add("team-visible");
-        } else {
-          teamRef.current.classList.remove("team-visible");
-        }
-      },
-      {
-        threshold: 0.3,
-      },
-    );
 
-    observer.observe(teamRef.current);
-
-    return () => observer.disconnect();
-  }, []);
 
   //for commitment section animation
   useEffect(() => {
@@ -177,9 +49,9 @@ const AboutPage = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          commitmentRef.current.classList.add("commitment-visible");
+          entry.target.classList.add("commitment-visible");
         } else {
-          commitmentRef.current.classList.remove("commitment-visible");
+          entry.target.classList.remove("commitment-visible");
         }
       },
       {
@@ -209,6 +81,7 @@ const AboutPage = () => {
 
     if (missionRef.current) observer.observe(missionRef.current);
     if (visionRef.current) observer.observe(visionRef.current);
+    if (founderRef.current) observer.observe(founderRef.current);
 
     return () => observer.disconnect();
   }, []);
@@ -220,9 +93,9 @@ const AboutPage = () => {
         <div className="about-hero-container">
           <div className="about-hero-content">
             <p className="about-kicker">ABOUT</p>
-            <h1 className="about-title">Dipharmainnovation</h1>
+            <h1 className="about-title">Di Pharma Innovation</h1>
             <p className="about-description">
-              Dipharmainnovation is a forward-thinking pharmaceutical and
+              Di Pharma Innovation is a forward-thinking pharmaceutical and
               healthcare solutions provider committed to improving access to
               quality medical products. With a strong focus on reliability,
               innovation, and customer satisfaction.
@@ -261,86 +134,70 @@ const AboutPage = () => {
           <div className="mission-content" ref={missionRef}>
             <h2>Our Mission</h2>
             <p>
-              To enhance the <strong>healthcare ecosystem</strong> by providing{" "}
-              <strong>
+              To enhance the <strong className="mission-highlight">healthcare</strong> ecosystem by providing{" "}
+              <strong className="mission-highlight">
                 safe, high-quality, and affordable medical products
               </strong>{" "}
               that support better patient outcomes and{" "}
-              <strong>empower healthcare providers</strong> in their day-to-day
-              operations.
+              <strong className="mission-highlight">empower healthcare</strong> providers
+              in their day-to-day operations.
             </p>
           </div>
 
           <div className="vision-content" ref={visionRef}>
             <h2>Our Vision</h2>
             <p>
-              To become one of <strong>India’s most trusted names</strong> in
-              pharmaceuticals and healthcare supplies by driving innovation,
-              strengthening partnerships, and continuously{" "}
-              <strong>elevating product standards</strong>.
+              To become one of{" "}
+              <strong className="mission-highlight">India’s</strong> most{" "}
+              <strong className="mission-highlight">trusted</strong> names in{" "}
+              <strong className="mission-highlight">
+                pharmaceuticals and healthcare supplies
+              </strong>{" "}
+              by driving innovation, strengthening partnerships, and
+              continuously{" "}
+              <strong className="mission-highlight">elevating</strong> product
+              standards.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="team-section" ref={teamRef}>
-        <div className="team-wrapper">
-          {/* LEFT */}
-          <div className="team-left">
-            <p className="team-label">Our Team</p>
-            <h2>Dedicated Minds Driving Healthcare Forward</h2>
+      {/* Meet Our Founder Section */}
+      <section className="founder-section" ref={founderRef}>
+        <div className="founder-container">
+          <div className="founder-content">
+            <h2 className="founder-title">Meet Our Founder</h2>
+            <p className="founder-description">
+              Driven by a passion for accessible and quality healthcare, our
+              founder envisioned a trusted medical ecosystem that combines
+              advanced diagnostics, expert care, and patient-centered services
+              under one roof. With a commitment to innovation, compassion, and
+              excellence, the foundation was built to ensure every patient
+              receives accurate diagnosis, personalized treatment, and reliable
+              healthcare support for a healthier future.
+            </p>
           </div>
-
-          {/* RIGHT */}
-          <div
-            className="team-right"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onTouchStart={() => setIsPaused(true)}
-            onTouchEnd={() => setIsPaused(false)}
-          >
-            <div
-            className="team-track"
-            ref={trackRef}
-            style={{
-              transform: `translateX(-${currentIndex * cardWidth}px)`,
-              transition: isTransitionEnabled
-                ? "transform 0.8s ease-in-out"
-                : "none",
-            }}
-          >
-              {[...teamMembers, ...teamMembers].map((member, index) => {
-                const isActive = index % total === activeIndex;
-
-                return (
-                  <div
-                    key={index}
-                    className={`team-card ${isActive ? "active" : ""}`}
-                  >
-                    <img src={member.img} alt={member.name} />
-
-                    {!isActive && (
-                      <span className="vertical-text">{member.role}</span>
-                    )}
-
-                    <div className="team-info">
-                      <h3>{member.name}</h3>
-                      <p>{member.role}</p>
-                    </div>
-                  </div>
-                );
-              })}
+          <div className="founder-image-wrapper">
+            <img
+              src={magaeshImage}
+              alt="Mr. Magesh Kumar"
+              className="founder-image"
+            />
+            <div className="founder-badge">
+              <h3 className="founder-name">Mr. Magesh Kumar</h3>
+              <p className="founder-role">Director, Dr. Will</p>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Our Commitment Section */}
       <section className="commitment-section" ref={commitmentRef}>
         <div className="commitment-content">
           <h2 className="commitment-title">Our Commitment</h2>
           <p className="commitment-text">
-            At <strong>Dipharmainnovation,</strong> we believe{" "}
+            At <strong>Di Pharma Innovation,</strong> we believe{" "}
             <strong>healthcare is more than a business </strong> - it's a{" "}
             <strong> responsibility</strong>. Our commitment to{" "}
             <strong>excellence</strong> drives us to provide products that
