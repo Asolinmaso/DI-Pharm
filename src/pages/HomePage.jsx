@@ -25,6 +25,8 @@ function HomePage() {
           });
         }, 100);
       }
+    } else {
+      window.scrollTo(0, 0);
     }
   }, [location]);
 

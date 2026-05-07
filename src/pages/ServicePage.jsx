@@ -13,6 +13,46 @@ import diwhole from "../assets/brands/di_whole.png";
 import mj7 from "../assets/brands/mj7.png";
 import indocontent from "../assets/brands/indocontent.png";
 import { useNavigate } from "react-router-dom";
+import { motion, useSpring, useTransform, useInView } from "framer-motion";
+
+const CountUp = ({ end, suffix = "" }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.5 });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    if (isInView) {
+      let start = 0;
+      const duration = 2000; // 2 seconds
+      const frameRate = 50; // ms
+      const totalFrames = duration / frameRate;
+      let frame = 0;
+
+      interval = setInterval(() => {
+        frame++;
+        if (frame <= totalFrames) {
+          // Show random numbers during the animation
+          setDisplayValue(Math.floor(Math.random() * (end * 1.5)));
+        } else {
+          setDisplayValue(end);
+          clearInterval(interval);
+        }
+      }, frameRate);
+    } else {
+      setDisplayValue(0);
+    }
+
+    return () => clearInterval(interval);
+  }, [isInView, end]);
+
+  return (
+    <span ref={ref}>
+      <span>{displayValue}</span>
+      {suffix}
+    </span>
+  );
+};
 
 // const COUNTRY_RULES = {
 //   "+91": { name: "India", min: 10, max: 10 },
@@ -127,6 +167,10 @@ const ServicePage = () => {
 
   //for hero section animation
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         entry.target.classList.toggle("active", entry.isIntersecting);
@@ -226,7 +270,7 @@ const ServicePage = () => {
                 className="service-card-icon"
               />
             </div>
-            <h3 className="service-card-title">Doctor Will</h3>
+            <h3 className="service-card-title">Dr.will</h3>
             <p className="service-card-text">
               Professional doctor consultation services ensure timely diagnosis and effective treatment. Our experienced medical team provides personalized care, helping patients maintain better health and well-being with trusted support.
             </p>
@@ -351,19 +395,27 @@ const ServicePage = () => {
         </div>
         <div className="service-community-stats">
           <div className="service-stat-card">
-            <p className="service-stat-number">1000+</p>
+            <p className="service-stat-number">
+              <CountUp end={1000} suffix="+" />
+            </p>
             <p className="service-stat-label">Products</p>
           </div>
           <div className="service-stat-card">
-            <p className="service-stat-number">20+</p>
+            <p className="service-stat-number">
+              <CountUp end={20} suffix="+" />
+            </p>
             <p className="service-stat-label">Dosage Form</p>
           </div>
           <div className="service-stat-card">
-            <p className="service-stat-number">30+</p>
+            <p className="service-stat-number">
+              <CountUp end={30} suffix="+" />
+            </p>
             <p className="service-stat-label">Therapeutic Areas</p>
           </div>
           <div className="service-stat-card">
-            <p className="service-stat-number">3</p>
+            <p className="service-stat-number">
+              <CountUp end={3} />
+            </p>
             <p className="service-stat-label"> DI Polyclinics</p>
           </div>
         </div>
@@ -381,7 +433,7 @@ const ServicePage = () => {
               <span className="service-brand-pill">
                 <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M31.5251 4.36153C31.5926 4.16723 31.6005 3.95718 31.5477 3.75838C31.4949 3.55958 31.3839 3.38111 31.2289 3.2459C29.0586 1.37365 26.3407 0.254115 23.4814 0.0546519C18.987 -0.271598 16.2026 0.932152 14.7964 1.82653C14.6562 1.91667 14.5398 2.03915 14.4568 2.18366C14.3739 2.32817 14.3269 2.49049 14.3197 2.65696C14.3125 2.82343 14.3454 2.98919 14.4157 3.14029C14.4859 3.29139 14.5914 3.42342 14.7232 3.52528L26.1776 12.4278C26.4117 12.6093 26.6858 12.7324 26.977 12.7866C27.2682 12.8408 27.5682 12.8247 27.8519 12.7396C28.1357 12.6545 28.395 12.5029 28.6083 12.2973C28.8216 12.0917 28.9827 11.8382 29.0782 11.5578L31.5251 4.36153ZM3.29137 30.7859C3.06409 30.9399 2.89083 31.1613 2.79598 31.419C2.70113 31.6766 2.68946 31.9575 2.76262 32.2222C3.19949 33.7878 4.49699 37.0447 8.18137 40.0072C11.8639 42.9697 16.2214 43.2903 18.0832 43.2453C18.3553 43.2401 18.6188 43.1492 18.8363 42.9856C19.0538 42.822 19.2141 42.594 19.2945 42.334L26.6351 19.0972C27.1657 17.419 25.2851 16.0128 23.8264 16.9934L3.29137 30.7859ZM8.65762 6.26465C8.47972 6.19482 8.28873 6.16468 8.09797 6.17634C7.90722 6.188 7.72131 6.24118 7.55325 6.33215C6.19574 7.0709 2.71575 9.3509 0.919495 14.0309C-0.464255 17.6384 0.0232452 21.6284 0.40387 23.5803C0.529495 24.2178 1.20262 24.5853 1.80637 24.349L23.8357 15.7484C25.4089 15.1353 25.4145 12.9115 23.8451 12.289L8.65762 6.26465ZM41.3351 22.9165C41.9726 23.3478 42.8426 22.9672 42.9532 22.204C43.2457 20.1884 43.497 16.6784 42.3307 14.0309C40.7745 10.5022 38.1345 8.32715 36.8801 7.44215C36.6874 7.30786 36.4552 7.24208 36.2206 7.25534C35.9861 7.26859 35.7628 7.36012 35.5864 7.51528L30.027 12.4465C29.8154 12.6345 29.6495 12.8683 29.5419 13.1301C29.4343 13.3918 29.3878 13.6747 29.4061 13.9572C29.4243 14.2396 29.5068 14.5142 29.6472 14.7599C29.7877 15.0057 29.9823 15.2161 30.2164 15.3753L41.3351 22.9165ZM25.8007 41.7359C25.7445 42.3922 26.3014 42.9359 26.9557 42.8647C29.0614 42.6397 33.3907 41.8034 36.6307 38.7059C38.8823 36.5334 40.4419 33.7442 41.1139 30.6884C41.1535 30.4984 41.1505 30.302 41.1051 30.1133C41.0598 29.9246 40.9731 29.7483 40.8514 29.5972L31.1314 17.6047C30.0776 16.3053 27.9795 16.9465 27.8332 18.6115L25.8007 41.7359Z" fill="white" /></svg>
-                Dr.Will
+                Dr.will
               </span>
               <span className="service-brand-pill">
                 <svg width="35" height="45" viewBox="0 0 35 45" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -439,7 +491,7 @@ const ServicePage = () => {
             medical
           </p>
 
-          <h4 className="quote-author">Dr.Jefry Wilson</h4>
+          <h4 className="quote-author">Dr. Jefry Wilson</h4>
           <span className="quote-role">Managing Director</span>
         </div>
       </section>

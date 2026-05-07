@@ -49,19 +49,22 @@ const Home = () => {
           </div>
           {/* Bottom Elements */}
 
-          <div className={styles.bottomLeft}>
-            <div className={styles.social}>
-              <span>Follow Us - </span>
-              <a href="#">Facebook.</a> <a href="#">Linked In.</a>{" "}
-              <a href="#">Instagram</a>
-            </div>
+        </div>
+        <div className={styles.bottomLeft}>
+          <div className={styles.social}>
+            <span>Follow Us – </span>
+            <a href="#">Instagram.</a> <a href="#">Linked In.</a>{" "}
+            <a href="#">Facebook</a>
           </div>
+          <div className={styles.exploreWrapper}>
+            <button className={styles.exploreButton}>Explore More</button>
+          </div>
+        </div>
 
-          <div className={styles.bottomRight}>
-            <p>
-              <strong>DI Polyclinic</strong> delivers trusted healthcare with a focus on patient comfort and personalized care.
-            </p>
-          </div>
+        <div className={styles.bottomRight}>
+          <p>
+            <strong>DI Polyclinic</strong> delivers trusted healthcare with a focus on patient comfort and personalized care.
+          </p>
         </div>
       </section>
     </div>

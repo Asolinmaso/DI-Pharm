@@ -1,6 +1,4 @@
-:root {
-
-}
+:root {}
 
 .about-page {
   min-height: 100vh;
@@ -440,7 +438,8 @@ strong {
   padding: 15px 25px;
   border-radius: 0 10px 10px 0;
   box-shadow: 10px 0 20px rgba(0, 0, 0, 0.2);
-  width: 250px;
+  width: fit-content;
+  max-width: 90%;
 
   /* Hover Reveal state */
   opacity: 0;
@@ -472,6 +471,7 @@ strong {
   color: #4a47ff;
   font-weight: 600;
   margin: 0;
+  white-space: nowrap;
 }
 
 .founder-role {
@@ -986,7 +986,8 @@ strong {
   }
 
   .founder-badge {
-    width: 200px;
+    width: fit-content;
+    max-width: 95%;
     padding: 10px 15px;
     opacity: 1;
     transform: translateX(0);

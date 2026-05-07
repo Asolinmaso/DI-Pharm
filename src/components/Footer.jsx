@@ -124,7 +124,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="footer-partner">
-              <h2>Our Partners Companies</h2>
+              <h2>Our Partner Companies</h2>
               <div className="footer-partner-list">
                 <img src={indoPartner} alt="" />
                 <img src={drwill} alt="" />
@@ -155,10 +155,16 @@ const Footer = () => {
             <h3 className="footer-heading">Support</h3>
             <ul className="footer-links">
               <li>
+                <Link to={"/contact"}>Help Centre</Link>
+              </li>
+              <li>
                 <Link to={"/contact"}>Contact Us</Link>
               </li>
               <li>
                 <Link to={"/contact#faq"}>FAQ</Link>
+              </li>
+              <li>
+                <Link to={"/services#community"}>Community</Link>
               </li>
             </ul>
           </div>

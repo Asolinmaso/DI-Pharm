@@ -20,6 +20,10 @@ const AboutPage = () => {
   const founderRef = useRef(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -180,12 +184,12 @@ const AboutPage = () => {
           <div className="founder-image-wrapper">
             <img
               src={magaeshImage}
-              alt="Mr. Magesh Kumar"
+              alt="Dr. Dheeran Jefry Wilson"
               className="founder-image"
             />
             <div className="founder-badge">
-              <h3 className="founder-name">Mr. Magesh Kumar</h3>
-              <p className="founder-role">Director, Dr. Will</p>
+              <h3 className="founder-name">Dr. Jefry Wilson</h3>
+              <p className="founder-role">Founder and Director</p>
             </div>
           </div>
         </div>
