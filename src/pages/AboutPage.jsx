@@ -188,7 +188,7 @@ const AboutPage = () => {
               className="founder-image"
             />
             <div className="founder-badge">
-              <h3 className="founder-name">Dr. Dheeran Jefry Wilson</h3>
+              <h3 className="founder-name">Dr. Jefry Wilson</h3>
               <p className="founder-role">Founder and Director</p>
             </div>
           </div>

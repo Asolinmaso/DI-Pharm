@@ -491,7 +491,7 @@ const ServicePage = () => {
             medical
           </p>
 
-          <h4 className="quote-author">Dr. Dheeran Jefry Wilson</h4>
+          <h4 className="quote-author">Dr. Jefry Wilson</h4>
           <span className="quote-role">Managing Director</span>
         </div>
       </section>
