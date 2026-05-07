@@ -490,8 +490,11 @@
   }
 
   .send-message-btn {
-    width: 100%;
-    padding: 1rem;
+    width: fit-content;
+    align-self: center;
+    padding: 0.7rem 2.5rem;
+    font-size: 14px;
+    margin-top: 1rem;
   }
 }
 
@@ -571,7 +574,7 @@
   }
 
   .send-message-btn {
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .select-wrapper {

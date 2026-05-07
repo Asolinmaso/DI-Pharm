@@ -513,10 +513,12 @@
   border-bottom: 1.5px solid rgba(255, 255, 255, 0.8);
   color: #ffffff;
   font-size: 1.1rem;
+  font-family: inherit;
   transition: all 0.3s ease;
 }
 
-.career-form input::placeholder {
+.career-form input::placeholder,
+.career-form textarea::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
