@@ -52,7 +52,7 @@ export default function NetworkDiagram() {
         <div className="server-wrap lt">
           <img src={blue} className="server blue" alt="" />
           <button className="server-btn">
-            <span className="btn-text">Dr.Will</span>
+            <span className="btn-text">Dr.will</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
                 <g fill="none">
@@ -193,7 +193,7 @@ export default function NetworkDiagram() {
         <div className="server-wrap wl">
           <img src={white} className="server white" alt="" />
           <button className="server-btn">
-            <span className="btn-text">Indo Continental</span>
+            <span className="btn-text">Indo Continental 7</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
                 <g fill="none">

@@ -325,6 +325,31 @@ const CareerPage = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
+    // Force scroll to top on mount with a tiny delay to override any browser/other effect behaviors
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, 10);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    const sectionTitle = document.querySelector(".section-title");
+    if (sectionTitle) {
+      const yOffset = -120; // Standard offset for the navbar
+      const y =
+        sectionTitle.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -406,20 +431,6 @@ const CareerPage = () => {
       setCurrentPage(1);
     }
   }, [itemsPerPage, currentPage]);
-
-  useEffect(() => {
-    if (currentPage > 1) {
-      const section = document.querySelector(".positions-section");
-
-      if (section) {
-        const yOffset = -80; // 🔥 adjust this (try -60 to -120)
-        const y =
-          section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }
-  }, [currentPage]);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const selectedRoles = openRoles.slice(startIndex, startIndex + itemsPerPage);
