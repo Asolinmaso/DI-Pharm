@@ -84,21 +84,23 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+      const response = await fetch(import.meta.env.VITE_GOOGLE_SHEET_CONTACT_URL, {
         method: "POST",
+        mode: "cors",
+        credentials: "omit",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "text/plain;charset=utf-8",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-         Swal.fire({
-              icon: "success",
-              title: "Contact Submitted!",
-              text: "Thank you for Contacting. Our team will contact you within 24 hours.",
-              confirmButtonColor: "#222065",
-            });
+        Swal.fire({
+          icon: "success",
+          title: "Contact Submitted!",
+          text: "Thank you for Contacting. Our team will contact you within 24 hours.",
+          confirmButtonColor: "#222065",
+        });
         setFormData({
           firstName: "",
           lastName: "",
@@ -108,22 +110,22 @@ const ContactSection = () => {
           message: "",
         });
       } else {
-         Swal.fire({
-              icon: "error",
-              title: "Submission Failed",
-              text: "Something went wrong. Please try again later.",
-              confirmButtonColor: "#d33",
-            });
+        Swal.fire({
+          icon: "error",
+          title: "Submission Failed",
+          text: "Something went wrong. Please try again later.",
+          confirmButtonColor: "#d33",
+        });
       }
     } catch (error) {
       console.error(error);
       Swal.fire({
-              icon: "error",
-              title: "Submission Failed",
-              text: "Something went wrong. Please try again later.",
-              confirmButtonColor: "#d33",
-            });
-    }finally {
+        icon: "error",
+        title: "Submission Failed",
+        text: "Something went wrong. Please try again later.",
+        confirmButtonColor: "#d33",
+      });
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -154,7 +156,9 @@ const ContactSection = () => {
         <div className="contact-info-panel" ref={infoRef}>
           <div className="info-item">
             <h3 className="info-label">Contact</h3>
-            <p className="info-value">+91-9677787817</p>
+            <div className="info-value">
+              <p>+91-9677787817</p>
+            </div>
           </div>
 
           <div className="info-item">
@@ -176,7 +180,7 @@ const ContactSection = () => {
           <div className="info-item">
             <h3 className="info-label">Stay Connected</h3>
             <div className="social-icons">
-              <a href="#" className="social-icon" aria-label="Facebook">
+              <a href="https://www.facebook.com/profile.php?id=61571431221147" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Facebook">
                 <svg
                   width="38"
                   height="38"
@@ -190,7 +194,7 @@ const ContactSection = () => {
                   />
                 </svg>
               </a>
-              <a href="#" className="social-icon" aria-label="WhatsApp">
+              <a href="https://wa.me/919677787817" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="WhatsApp">
                 <svg
                   width="37"
                   height="37"
@@ -204,7 +208,7 @@ const ContactSection = () => {
                   />
                 </svg>
               </a>
-              <a href="#" className="social-icon" aria-label="Linkedin">
+              <a href="https://www.linkedin.com/company/di-pharma-innovation-pvt-ltd/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Linkedin">
                 <svg
                   width="28"
                   height="28"
@@ -213,8 +217,8 @@ const ContactSection = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M14.5952 10.262V12.2418C15.0098 11.6103 15.5813 11.0972 16.2537 10.7528C16.9261 10.4084 17.6764 10.2445 18.4312 10.2772C22.462 10.2772 23.3335 12.7972 23.3335 16.0755V22.75H19.6002V16.8327C19.6002 15.421 19.3155 13.6057 17.1175 13.6057C14.986 13.6057 14.622 15.1422 14.622 16.7277V22.75H10.9004V10.262H14.5952ZM8.4002 7.12367C8.39974 7.4935 8.29011 7.85497 8.08506 8.16276C7.88001 8.47055 7.58866 8.71095 7.24753 8.85383C6.90655 8.99556 6.53111 9.03264 6.16899 8.96034C5.80687 8.88804 5.47445 8.70963 5.21403 8.44783C4.95313 8.18587 4.7755 7.85261 4.70349 7.48996C4.63148 7.12731 4.6683 6.75147 4.80933 6.4097C4.95035 6.06792 5.18928 5.77547 5.49607 5.56913C5.80286 5.36278 6.16381 5.25175 6.53353 5.25C6.77926 5.25 7.02256 5.29851 7.2495 5.39276C7.47643 5.487 7.68252 5.62513 7.85595 5.79921C8.02937 5.97328 8.16673 6.17989 8.26012 6.40717C8.35352 6.63446 8.40112 6.87794 8.4002 7.12367Z"
                     fill="#222065"
                   />
@@ -224,7 +228,7 @@ const ContactSection = () => {
                   />
                 </svg>
               </a>
-              <a href="#" className="social-icon" aria-label="Instagram">
+              <a href="https://www.instagram.com/di_pharma_innovation/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Instagram">
                 <svg
                   width="32"
                   height="32"
@@ -237,14 +241,14 @@ const ContactSection = () => {
                     fill="#222065"
                   />
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M9.02682 4.10919C13.6615 3.59576 18.3388 3.59576 22.9735 4.10919C25.5055 4.39186 27.5468 6.38519 27.8442 8.92653C28.3934 13.6261 28.3934 18.3736 27.8442 23.0732C27.5468 25.6145 25.5055 27.6079 22.9748 27.8919C18.3397 28.4054 13.662 28.4054 9.02682 27.8919C6.49482 27.6079 4.45349 25.6145 4.15616 23.0745C3.6068 18.3745 3.6068 13.6265 4.15616 8.92653C4.45349 6.38519 6.49482 4.39186 9.02682 4.10919ZM22.6668 7.99986C22.3132 7.99986 21.9741 8.14034 21.724 8.39038C21.474 8.64043 21.3335 8.97957 21.3335 9.33319C21.3335 9.68681 21.474 10.026 21.724 10.276C21.9741 10.526 22.3132 10.6665 22.6668 10.6665C23.0204 10.6665 23.3596 10.526 23.6096 10.276C23.8597 10.026 24.0002 9.68681 24.0002 9.33319C24.0002 8.97957 23.8597 8.64043 23.6096 8.39038C23.3596 8.14034 23.0204 7.99986 22.6668 7.99986ZM9.66682 15.9999C9.66682 14.3202 10.3341 12.7092 11.5218 11.5215C12.7095 10.3338 14.3205 9.66653 16.0002 9.66653C17.6799 9.66653 19.2908 10.3338 20.4785 11.5215C21.6662 12.7092 22.3335 14.3202 22.3335 15.9999C22.3335 17.6796 21.6662 19.2905 20.4785 20.4782C19.2908 21.6659 17.6799 22.3332 16.0002 22.3332C14.3205 22.3332 12.7095 21.6659 11.5218 20.4782C10.3341 19.2905 9.66682 17.6796 9.66682 15.9999Z"
                     fill="#222065"
                   />
                 </svg>
               </a>
-              <a href="#" className="social-icon" aria-label="Email">
+              <a href="mailto:contact@dipharmainnovation.com" className="social-icon" aria-label="Email">
                 <svg
                   width="32"
                   height="32"
@@ -269,79 +273,76 @@ const ContactSection = () => {
           </p>
 
           <form onSubmit={handleSubmit} className="contact-form">
-            <div className="form-row">
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First name"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.firstName && (
-                  <span className="input-error">{errors.firstName}</span>
-                )}
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last name"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.lastName && (
-                  <span className="input-error">{errors.lastName}</span>
-                )}
-              </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First name"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+              />
+              {errors.firstName && (
+                <span className="input-error">{errors.firstName}</span>
+              )}
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last name"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+              />
+              {errors.lastName && (
+                <span className="input-error">{errors.lastName}</span>
+              )}
             </div>
 
-            <div className="form-row">
-              <div className="form-group">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.email && (
-                  <span className="input-error">{errors.email}</span>
-                )}
-              </div>
-              <div className="form-group">
-                <div className="phone-input-wrapper">
-                  <div className="select-wrapper">
-                    <select
-                      name="countryCode"
-                      value={formData.countryCode}
-                      onChange={handleChange}
-                      className="country-code-select"
-                    >
-                      <option value="+91">+91</option>
-                      <option value="+60">+60</option>
-                      <option value="+1">+1</option>
-                    </select>
-                  </div>
-
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder=" Phone number"
-                    value={formData.phone}
+            <div className="form-group">
+              <div className={`phone-input-wrapper ${errors.phone ? "input-error" : ""}`}>
+                <div className="select-wrapper">
+                  <select
+                    name="countryCode"
+                    value={formData.countryCode}
                     onChange={handleChange}
-                    inputMode="numeric"
-                    maxLength={10}
-                  />
+                    className="country-code-select"
+                  >
+                    <option value="+91">+91</option>
+                    <option value="+60">+60</option>
+                    <option value="+1">+1</option>
+                  </select>
                 </div>
 
-                {errors.phone && (
-                  <span className="input-error">{errors.phone}</span>
-                )}
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder=" Phone number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  inputMode="numeric"
+                  maxLength={10}
+                />
               </div>
+
+              {errors.phone && (
+                <span className="input-error">{errors.phone}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              {errors.email && (
+                <span className="input-error">{errors.email}</span>
+              )}
             </div>
 
             <div className="form-group">

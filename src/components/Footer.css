@@ -193,6 +193,23 @@
   line-height: 1.6;
 }
 
+.footer-phone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.footer-phone-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-phone-link:hover {
+  color: #60a5fa;
+}
+
 .contact-icon {
   width: 20px;
   height: 20px;

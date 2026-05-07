@@ -7,74 +7,94 @@ import Swal from "sweetalert2";
 
 const openRoles = [
   {
+    title: "Research Assistant – Pharmaceutical Formulations",
+    role_focus: "Assisting in formulation development, sample testing, documentation.",
+    type: "Full-time",
+    location: "Chennai"
+  },
+  {
     title: "Pharmacist",
-    role_focus:
-      "We are looking for a qualified Pharmacist to dispense medicines, manage inventory, and guide patients.",
+    role_focus: "Dispensing medicines, managing inventory, and guiding patients.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Staff Nurse",
-    role_focus:
-      "We are looking for a caring Staff Nurse to provide patient care, assist doctors, and monitor recovery.",
+    role_focus: "Providing patient care, assisting doctors, and monitoring recovery.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Physician Assistant",
-    role_focus:
-      "We are looking for a Physician Assistant to support doctors in diagnosis, procedures, and patient care.",
+    role_focus: "Supporting doctors in diagnosis, procedures, and patient care.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Surgical Nurse",
-    role_focus:
-      "We are looking for a Surgical Nurse to assist in surgeries and ensure patient safety during procedures.",
+    role_focus: "Assisting in surgeries and ensuring patient safety during procedures.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Lab Technician",
-    role_focus:
-      "We are looking for a Lab Technician to conduct tests, handle lab equipment, and maintain reports.",
+    role_focus: "Conducting tests, handling lab equipment, and maintaining reports.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Office Staff",
-    role_focus:
-      "We are looking for Office Staff to handle administrative tasks and support daily operations.",
+    role_focus: "Handling administrative tasks and supporting daily operations.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Front Office Receptionist",
-    role_focus:
-      "We are looking for a Receptionist to manage front desk operations, calls, and appointments.",
+    role_focus: "Managing front desk operations, calls, and appointments.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Accountant",
-    role_focus:
-      "We are looking for an Accountant to manage billing, financial records, and daily transactions.",
+    role_focus: "Managing billing, financial records, and daily transactions.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Store Assistant",
-    role_focus:
-      "We are looking for a Store Assistant to manage stock, organize supplies, and maintain inventory.",
+    role_focus: "Managing stock, organizing supplies, and maintaining inventory.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Managers",
-    role_focus:
-      "We are looking for Managers to oversee operations, manage teams, and ensure smooth workflow.",
+    role_focus: "Overseeing operations, managing teams, and ensuring smooth workflow.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Field Officers",
-    role_focus:
-      "We are looking for Field Officers to handle on-ground coordination and external operations.",
+    role_focus: "Handling on-ground coordination and external operations.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Duty Doctors & Consultants",
-    role_focus:
-      "We are looking for Duty Doctors & Consultants to provide consultation, diagnosis, and treatment.",
+    role_focus: "Providing consultation, diagnosis, and treatment.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Pharmacy Manager",
-    role_focus:
-      "We are looking for a Pharmacy Manager to supervise operations and manage pharmacy staff.",
+    role_focus: "Supervising operations and managing pharmacy staff.",
+    type: "Full-time",
+    location: "Chennai"
   },
   {
     title: "Delivery Assistant",
-    role_focus:
-      "We are looking for a Delivery Assistant to handle deliveries and support logistics operations.",
+    role_focus: "Handling deliveries and supporting logistics operations.",
+    type: "Full-time",
+    location: "Chennai"
   },
 ];
 
@@ -92,7 +112,19 @@ const CareerPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6); // default laptop
+  const [itemsPerPage, setItemsPerPage] = useState(5); // default laptop
+
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64String = reader.result.split(",")[1];
+        resolve(base64String);
+      };
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
   const validatePhoneByCountry = (countryCode, phone) => {
     const cleanPhone = phone.replace(/\D/g, "");
@@ -158,8 +190,10 @@ const CareerPage = () => {
       newErrors.message = "Message must be at least 10 characters";
     }
 
-    // File validation (if file is selected)
-    if (selectedFile) {
+    // File validation
+    if (!selectedFile) {
+      newErrors.upload = "Resume upload is required";
+    } else {
       const allowedTypes = [
         "application/pdf",
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -225,20 +259,30 @@ const CareerPage = () => {
 
     setIsSubmitting(true);
 
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("email", formData.email);
-    data.append("phone", formData.phone);
-    data.append("countryCode", formData.countryCode);
-    data.append("role", formData.role);
-    data.append("message", formData.message);
-    data.append("upload", selectedFile);
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      countryCode: formData.countryCode,
+      role: formData.role,
+      message: formData.message,
+      fileName: selectedFile.name,
+      fileType: selectedFile.type,
+      fileBase64: await fileToBase64(selectedFile),
+    };
 
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/submit-form`, {
+      const response = await fetch(import.meta.env.VITE_GOOGLE_SHEET_CAREER_URL, {
         method: "POST",
-        body: data,
+        mode: "cors",
+        credentials: "omit",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(payload),
       });
+
+      if (!response.ok) throw new Error("Network response was not ok");
 
       // 🎉 Success popup
       Swal.fire({
@@ -400,37 +444,31 @@ const CareerPage = () => {
       <div className="hero-info" ref={heroRef}>
         <p className="hero-sub">Join Us in Shaping the Future of Healthcare</p>
         <p className="hero-description">
-          At Dipharmanovation, we are committed to improving lives through
-          high-quality pharmaceuticals, medical essentials, and healthcare
-          solutions. Our team is growing, and we’re shaping the future of
-          healthcare.We’re growing fast and looking for passionate people to
-          help us improve lives through high-quality pharmaceuticals, medical
-          essentials, and healthcare solutions.
+          At Dipharmainnovation, we are committed to improving lives through high-quality pharmaceuticals, medical essentials, and healthcare solutions. Our team is growing, and we’re looking for passionate individuals who want to make an impact in the healthcare industry.
         </p>
       </div>
 
       <section className="positions-section">
         <div className="positions-content" ref={positionsRef}>
-          <div className="positions-text">
+          <div className="positions-left">
             <h2 className="section-title">Open Positions</h2>
 
-            <div className="hero-card">
+            <div className="positions-list-container">
               <ul className="role-list">
                 {selectedRoles.map((role, idx) => {
                   const realIndex = startIndex + idx;
+                  const isActive = activeIndex === realIndex || (activeIndex === null && idx === 0);
 
                   return (
                     <li
                       key={realIndex}
-                      className={`role-item ${activeIndex === realIndex ? "active" : ""}`}
+                      className={`role-item ${isActive ? "active" : ""}`}
                       onClick={() => {
                         setActiveIndex(realIndex);
-
                         setFormData((prev) => ({
                           ...prev,
                           role: role.title,
                         }));
-
                         document
                           .getElementById("career-contact")
                           ?.scrollIntoView({
@@ -438,32 +476,33 @@ const CareerPage = () => {
                           });
                       }}
                     >
-                      <div>
+                      <div className="role-details">
                         <p className="role-name">{role.title}</p>
-                        <p className="role-meta">{role.role_focus}</p>
+                        <p className="role-focus">Role Focus: {role.role_focus}</p>
+                        <p className="role-meta">
+                          {role.type} | {role.location}
+                        </p>
                       </div>
 
-                      <button
-                        className="role-apply"
-                        onClick={(e) => {
-                          e.stopPropagation();
-
-                          setActiveIndex(realIndex);
-
-                          setFormData((prev) => ({
-                            ...prev,
-                            role: role.title,
-                          }));
-
-                          document
-                            .getElementById("career-contact")
-                            ?.scrollIntoView({
-                              behavior: "smooth",
-                            });
-                        }}
-                      >
-                        Apply Now
-                      </button>
+                      <div className="role-action">
+                        <div className="arrow-circle">
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7 17L17 7M17 7H7M17 7V17"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
                     </li>
                   );
                 })}
@@ -471,7 +510,10 @@ const CareerPage = () => {
               <div className="pagination">
                 <button
                   disabled={currentPage === 1}
-                  onClick={() => setCurrentPage((prev) => prev - 1)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentPage((prev) => prev - 1);
+                  }}
                 >
                   Prev
                 </button>
@@ -482,12 +524,20 @@ const CareerPage = () => {
 
                 <button
                   disabled={currentPage === totalPages}
-                  onClick={() => setCurrentPage((prev) => prev + 1)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentPage((prev) => prev + 1);
+                  }}
                 >
                   Next
                 </button>
               </div>
             </div>
+          </div>
+
+          <div className="hero-portrait framed" ref={portraitRef}>
+            <div className="portrait-clip-bg"></div>
+            <img src={personOne} alt="Career Opportunities" />
           </div>
         </div>
       </section>
@@ -495,23 +545,25 @@ const CareerPage = () => {
       <section className="career-contact-block" id="career-contact">
         <div className="contact-card">
           <div className="contact-portrait" ref={contactportraitRef}>
+            <div className="portrait-clip-bg-contact"></div>
             <img src={personTwo} alt="Work with us" />
           </div>
           <div className="contact-form-wrapper" ref={formRef}>
             <div className="contact-form-header">
-              <p className="contact-kicker">
+              <h2 className="contact-kicker">
                 Our Team Will Respond to You Within 24 Hours
-              </p>
+              </h2>
             </div>
             <form className="career-form" onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group-career">
+
                   <input
                     type="text"
                     name="name"
-                    placeholder="Name"
                     value={formData.name}
                     onChange={handleChange}
+                    placeholder="Name"
                     className={errors.name ? "input-error-career" : ""}
                   />
                   {errors.name && (
@@ -519,7 +571,9 @@ const CareerPage = () => {
                   )}
                 </div>
                 <div className="form-group-career">
-                  <div className="phone-input-wrapper-career">
+                  <div
+                    className={`phone-input-wrapper-career ${errors.phone ? "input-error-career" : ""}`}
+                  >
                     <div className="select-wrapper-career">
                       <select
                         name="countryCode"
@@ -527,18 +581,60 @@ const CareerPage = () => {
                         onChange={handleChange}
                         className="country-code-select-career"
                       >
-                        <option value="+91">+91</option>
-                        <option value="+60">+60</option>
-                        <option value="+1">+1</option>
+                        <option value="+91"> +91</option>
+                        <option value="+1"> +1</option>
+                        <option value="+44"> +44</option>
+                        <option value="+61"> +61</option>
+                        <option value="+60"> +60</option>
+                        <option value="+65"> +65</option>
+                        <option value="+971"> +971</option>
+                        <option value="+1"> +1</option>
+                        <option value="+49"> +49</option>
+                        <option value="+33"> +33</option>
+                        <option value="+81"> +81</option>
+                        <option value="+86"> +86</option>
+                        <option value="+7"> +7</option>
+                        <option value="+39"> +39</option>
+                        <option value="+34"> +34</option>
+                        <option value="+55"> +55</option>
+                        <option value="+27"> +27</option>
+                        <option value="+82"> +82</option>
+                        <option value="+92"> +92</option>
+                        <option value="+880"> +880</option>
+                        <option value="+94"> +94</option>
+                        <option value="+977"> +977</option>
+                        <option value="+66"> +66</option>
+                        <option value="+62"> +62</option>
+                        <option value="+84"> +84</option>
+                        <option value="+63"> +63</option>
+                        <option value="+41"> +41</option>
+                        <option value="+31"> +31</option>
+                        <option value="+46"> +46</option>
+                        <option value="+47"> +47</option>
+                        <option value="+45"> +45</option>
+                        <option value="+353"> +353</option>
+                        <option value="+64"> +64</option>
+                        <option value="+90"> +9 Turks</option>
+                        <option value="+966"> +966</option>
+                        <option value="+965"> +965</option>
+                        <option value="+974"> +974</option>
+                        <option value="+9Om"> +968</option>
+                        <option value="+973"> +973</option>
+                        <option value="+20"> +20</option>
                       </select>
+                      <span className="select-arrow-career">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M7 10L12 15L17 10" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
                     </div>
 
                     <input
                       type="tel"
                       name="phone"
-                      placeholder=" Phone number"
                       value={formData.phone}
                       onChange={handleChange}
+                      placeholder="Phone Number"
                       inputMode="numeric"
                       maxLength={10}
                     />
@@ -548,14 +644,15 @@ const CareerPage = () => {
                   )}
                 </div>
               </div>
+
               <div className="form-row">
                 <div className="form-group-career">
                   <input
                     type="email"
                     name="email"
-                    placeholder="Email"
                     value={formData.email}
                     onChange={handleChange}
+                    placeholder="Email"
                     className={errors.email ? "input-error-career" : ""}
                   />
                   {errors.email && (
@@ -566,9 +663,9 @@ const CareerPage = () => {
                   <input
                     type="text"
                     name="role"
-                    placeholder="Job Position"
                     value={formData.role}
                     onChange={handleChange}
+                    placeholder="Job Position"
                     className={errors.role ? "input-error-career" : ""}
                   />
                   {errors.role && (
@@ -576,66 +673,55 @@ const CareerPage = () => {
                   )}
                 </div>
               </div>
+
               <div className="form-group-career">
                 <textarea
                   name="message"
-                  placeholder="Message"
-                  rows="4"
+                  rows="1"
                   value={formData.message}
                   onChange={handleChange}
+                  placeholder="Message"
                   className={errors.message ? "input-error-career" : ""}
                 />
                 {errors.message && (
                   <span className="error-message-career">{errors.message}</span>
                 )}
               </div>
-              <div className="form-actions upload-row-career">
-                <div className="form-group-career">
-                  <label className="file-upload-career">
-                    <input
-                      type="file"
-                      name="upload"
-                      onChange={handleFileChange}
-                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                    />
 
-                    <span className="upload-btn">
-                      <svg
-                        className="upload-svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 12 12"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M5.41667 8.81417V1.60583L3.475 3.5475L2.885 2.94917L5.83333 0L8.7825 2.94917L8.1925 3.54833L6.25 1.60583V8.81417H5.41667ZM1.34667 11.6667C0.962778 11.6667 0.6425 11.5383 0.385833 11.2817C0.129167 11.025 0.000555556 10.7044 0 10.32V8.30083H0.833333V10.32C0.833333 10.4483 0.886667 10.5661 0.993333 10.6733C1.1 10.7806 1.2175 10.8339 1.34583 10.8333H10.3208C10.4486 10.8333 10.5661 10.78 10.6733 10.6733C10.7806 10.5667 10.8339 10.4489 10.8333 10.32V8.30083H11.6667V10.32C11.6667 10.7039 11.5383 11.0242 11.2817 11.2808C11.025 11.5375 10.7044 11.6661 10.32 11.6667H1.34667Z"
-                          fill="#222065"
-                        />
-                      </svg>
-                      Upload File
-                    </span>
-                    <span className="file-text">{fileName}</span>
-                  </label>
-                  {errors.upload && (
-                    <span className="error-message-career">
-                      {errors.upload}
-                    </span>
-                  )}
+              <div className="form-actions-row">
+                <div className="upload-section-career">
+                  <div className={`upload-box-career ${errors.upload ? "upload-error-career" : ""}`}>
+                    <label className="upload-label-career">
+                      <input
+                        type="file"
+                        name="upload"
+                        onChange={handleFileChange}
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                        style={{ display: 'none' }}
+                      />
+                      <span className="upload-btn-white">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 16V4M12 4L8 8M12 4L16 8M4 20H20" stroke="#161952" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        Upload File
+                      </span>
+                    </label>
+                    <span className="file-name-display-career">{fileName}</span>
+                  </div>
+                  <div className="upload-info-career">
+                    <p>Drag & drop your file here (PDF, DOCX, JPG, PNG)</p>
+                    <p>Max size: 5MB</p>
+                  </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="send-btn-career"
+                  className="career-submit-btn"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Submitting..." : "Submit"}
+                  {isSubmitting ? "..." : "Submit"}
                 </button>
               </div>
-              <p className="upload-hint">
-                Drag & drop your file here (PDF, DOCX, JPG, PNG) <br />
-                Max size: 5MB
-              </p>
             </form>
           </div>
         </div>

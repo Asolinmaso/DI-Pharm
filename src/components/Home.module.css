@@ -1,9 +1,11 @@
 .hero {
     position: relative;
     min-height: 100vh;
-     background:url("../assets/home_background.png");
-    background-size: cover;        /* KEY */
-    background-position: center;   /* KEY */
+    background: url("../assets/home_background.png");
+    background-size: cover;
+    /* KEY */
+    background-position: center;
+    /* KEY */
     background-repeat: no-repeat;
     /* Subtle glowing center */
     color: white;
@@ -66,7 +68,7 @@
 
 /* --- Bottom Elements --- */
 .bottomLeft {
-    
+
     width: 100%;
     max-width: 550px;
 }
@@ -152,9 +154,10 @@
 }
 
 @media (max-width: 1024px) {
-    .hero{
+    .hero {
         min-height: 80vh;
     }
+
     .visualsContainer {
         transform: scale(0.8);
     }
@@ -166,6 +169,7 @@
     .subtitle {
         font-size: 20px;
     }
+
     /* Keep bottomLeft and bottomRight side by side */
     .bottomLeft {
         position: relative;
@@ -181,16 +185,18 @@
         font-size: 16px;
         margin-bottom: 1rem;
     }
-    .bottomRight{
+
+    .bottomRight {
         max-width: 45%;
     }
 }
 
 @media (max-width: 768px) {
-    .hero{
+    .hero {
         min-height: fit-content;
         padding-bottom: 30px;
     }
+
     .title {
         font-size: 36px;
     }
@@ -236,23 +242,25 @@
     .bottomRight {
         position: static;
         bottom: 40px;
-         margin-left: auto;
+        margin-left: auto;
         max-width: 45%;
     }
 
     .bottomRight p {
         font-size: 16px;
     }
-    
+
 }
 
 @media (max-width: 480px) {
-    .textContainer{
+    .textContainer {
         margin-top: 8px;
     }
-    .subtitle{
+
+    .subtitle {
         font-size: 16px;
     }
+
     /* Keep bottomLeft and bottomRight side by side */
     .bottomLeft {
         position: relative;
@@ -289,25 +297,29 @@
     .bottomRight p {
         font-size: 16px;
     }
-    
+
 }
+
 @media (max-width: 420px) {
-    .social{
+    .social {
         font-size: 14px;
     }
-    .bottomRight p{
+
+    .bottomRight p {
         font-size: 14px;
     }
-    .subtitle{
+
+    .subtitle {
         font-size: 14px;
     }
-    
+
 }
 
 @media (max-width: 390px) {
     .container {
         max-width: 390px;
     }
+
     .title {
         font-size: 24px;
     }
@@ -321,6 +333,7 @@
         max-width: 48%;
         bottom: -45px;
     }
+
     .social {
         font-size: 10px;
     }
@@ -352,7 +365,7 @@
 }
 
 @media (max-width: 345px) {
-    .subtitle{
+    .subtitle {
         font-size: 10px;
     }
 }

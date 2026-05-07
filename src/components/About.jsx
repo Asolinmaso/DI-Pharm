@@ -25,7 +25,7 @@ const About = () => {
             organization committed to delivering comprehensive and accessible
             medical services to the community.
           </p>
-          <motion.div className={styles.arrowButton} whileHover={{ x: 10 }} onClick={()=> navigate('/about')}>
+          <motion.div className={styles.arrowButton} whileHover={{ x: 10 }} onClick={() => navigate('/about')}>
             <svg
               width="79"
               height="79"
@@ -37,9 +37,9 @@ const About = () => {
               <path
                 d="M23 40H56M56 40L43.625 56M56 40L43.625 24"
                 stroke="white"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </motion.div>
@@ -68,8 +68,8 @@ const About = () => {
                 <path
                   d="M8.00008 12.8889H18.6667M18.6667 12.8889L14.6667 17.7778M18.6667 12.8889L14.6667 8"
                   stroke="white"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>
@@ -96,8 +96,8 @@ const About = () => {
                 <path
                   d="M8.00008 12.8889H18.6667M18.6667 12.8889L14.6667 17.7778M18.6667 12.8889L14.6667 8"
                   stroke="white"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>
@@ -123,8 +123,8 @@ const About = () => {
                 <path
                   d="M8.00008 12.8889H18.6667M18.6667 12.8889L14.6667 17.7778M18.6667 12.8889L14.6667 8"
                   stroke="white"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>
