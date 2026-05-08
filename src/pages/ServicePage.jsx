@@ -78,27 +78,19 @@ const ServicePage = () => {
   const formRef = useRef(null);
   const navigate = useNavigate();
 
-  const [activeMobileCard, setActiveMobileCard] = useState(null);
-
-  useEffect(() => {
-    // Check if we are on mobile
-    const isMobile = window.innerWidth <= 767;
-    if (!isMobile) return;
-
-    // After 25 seconds, highlight the 2nd card (index 1)
-    const timer = setTimeout(() => {
-      setActiveMobileCard(1);
-    }, 25000); // 25 seconds delay
-
-    return () => clearTimeout(timer);
-  }, []);
+  const [activeMobileCards, setActiveMobileCards] = useState({});
 
   const handleCardClick = (index) => {
-    // If it's the active card on mobile, scroll to contact
-    if (window.innerWidth <= 767 && activeMobileCard === index) {
-      const contactSection = document.getElementById("community");
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
+    if (window.innerWidth <= 767) {
+      // Toggle the active state for the clicked card
+      setActiveMobileCards(prev => ({ ...prev, [index]: !prev[index] }));
+      
+      // Optional: scroll to contact if already active (for "Learn More" CTA)
+      if (activeMobileCards[index]) {
+        const contactSection = document.getElementById("community");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth" });
+        }
       }
     }
   };
@@ -287,7 +279,7 @@ const ServicePage = () => {
       {/* Services Cards */}
       <section className="service-cards-section" ref={cardsRef}>
         <div
-          className={`service-card card-1 ${activeMobileCard === 0 ? "active-mobile" : ""}`}
+          className={`service-card card-1 ${activeMobileCards[0] ? "active-mobile" : ""}`}
           onClick={() => handleCardClick(0)}
         >
           <div className="service-card-inner">
@@ -305,7 +297,7 @@ const ServicePage = () => {
           </div>
         </div>
         <div
-          className={`service-card card-2 ${activeMobileCard === 1 ? "active-mobile" : ""}`}
+          className={`service-card card-2 ${activeMobileCards[1] ? "active-mobile" : ""}`}
           onClick={() => handleCardClick(1)}
         >
           <div className="service-card-inner">
@@ -323,7 +315,7 @@ const ServicePage = () => {
           </div>
         </div>
         <div
-          className={`service-card card-3 ${activeMobileCard === 2 ? "active-mobile" : ""}`}
+          className={`service-card card-3 ${activeMobileCards[2] ? "active-mobile" : ""}`}
           onClick={() => handleCardClick(2)}
         >
           <div className="service-card-inner">
@@ -337,7 +329,7 @@ const ServicePage = () => {
           </div>
         </div>
         <div
-          className={`service-card card-4 ${activeMobileCard === 3 ? "active-mobile" : ""}`}
+          className={`service-card card-4 ${activeMobileCards[3] ? "active-mobile" : ""}`}
           onClick={() => handleCardClick(3)}
         >
           <div className="service-card-inner">
@@ -355,7 +347,7 @@ const ServicePage = () => {
           </div>
         </div>
         <div
-          className={`service-card card-5 ${activeMobileCard === 4 ? "active-mobile" : ""}`}
+          className={`service-card card-5 ${activeMobileCards[4] ? "active-mobile" : ""}`}
           onClick={() => handleCardClick(4)}
         >
           <div className="service-card-inner">
@@ -373,7 +365,7 @@ const ServicePage = () => {
           </div>
         </div>
         <div
-          className={`service-card card-6 ${activeMobileCard === 5 ? "active-mobile" : ""}`}
+          className={`service-card card-6 ${activeMobileCards[5] ? "active-mobile" : ""}`}
           onClick={() => handleCardClick(5)}
         >
           <div className="service-card-inner">
