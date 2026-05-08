@@ -223,47 +223,115 @@
 }
 
 .phone-input-wrapper {
-  display: grid;
-  grid-template-columns: 50px 1fr;
+  display: flex;
   align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.phone-input-wrapper:focus-within {
+  border-bottom-color: #60a5fa;
+  border-bottom-width: 2px;
+}
+
+.phone-input-wrapper input {
+  border-bottom: none !important;
+  padding: 1rem 0 !important;
 }
 
 /* Wrapper for arrow */
 .select-wrapper {
   position: relative;
+  min-width: 60px;
 }
 
 /* Remove default arrow */
-.country-code-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
+.country-code-custom {
   width: 100%;
   background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(203, 213, 225, 0.5);
   color: white;
-  padding: 1.3rem 0.5rem 1rem 0;
+  padding: 1rem 0;
   font-size: 1rem;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
 }
 
-/* Custom arrow */
-.select-wrapper::after {
-  content: "▼ ";
-  position: absolute;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
+.custom-arrow {
   font-size: 0.7rem;
-  color: white;
-  pointer-events: none;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
 }
 
-.country-code-select:focus {
-  outline: none;
-  border-bottom-color: #60a5fa;
+.custom-arrow.open {
+  transform: rotate(180deg);
+}
+
+.country-options-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100px;
+  max-height: 250px;
+  overflow-y: auto;
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  list-style: none;
+  padding: 5px 0;
+  margin-top: 5px;
+  border-radius: 8px;
+  animation: fadeInDown 0.2s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.country-option {
+  padding: 10px 15px;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.country-option:hover {
+  background: #334155;
+  color: #60a5fa;
+}
+
+/* Custom scrollbar for the dropdown */
+.country-options-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.country-options-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.country-options-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.country-options-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.select-wrapper::after {
+  display: none; /* Hide the old CSS arrow */
 }
 
 .country-code-select option {

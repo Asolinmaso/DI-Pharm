@@ -948,38 +948,98 @@
     font-size: 11.5px;
     padding: 0 5px;
     max-width: 100%;
-    line-height: 1.4;
   }
 
-  /* Timed Reveal Effect for Mobile - Faster transition (1s) */
+  /* Active State for Mobile - Persistent state triggered by manual tap */
+  .service-card.active-mobile::before {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+  }
+
+  .service-card.active-mobile::after {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .service-card.active-mobile .service-card-icon-wrapper {
+    transform: translateY(60px);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .service-card.active-mobile .service-card-text {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .service-card.active-mobile .service-card-title {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    font-size: 22px; /* Slightly smaller to prevent overflow */
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    z-index: 10;
+    text-align: center;
+    color: #fff;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .service-card.active-mobile::after {
+    /* Ensure the Learn More text is correctly positioned */
+    content: "Learn More →";
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    z-index: 10;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Reveal Animation for Mobile - Triggered by .in-view class on scroll */
   .service-card.in-view::before {
-    animation: revealStateBefore 1.4s ease-in-out forwards;
+    animation: revealStateBefore 1.8s ease-in-out forwards;
   }
 
   .service-card.in-view::after {
-    animation: revealStateAfter 1.4s ease-in-out forwards;
+    animation: revealStateAfter 1.8s ease-in-out forwards;
   }
 
   .service-card.in-view .service-card-icon-wrapper {
-    animation: revealIconWrapper 1.4s ease-in-out forwards;
+    animation: revealIconWrapper 1.8s ease-in-out forwards;
   }
 
   .service-card.in-view .service-card-text {
-    animation: revealText 1.4s ease-in-out forwards;
+    animation: revealText 1.8s ease-in-out forwards;
   }
 
   .service-card.in-view .service-card-text::after {
-    animation: revealLearnMore 1.4s ease-in-out forwards;
+    animation: revealLearnMore 1.8s ease-in-out forwards;
   }
 
   .service-card.in-view .service-card-title {
-    animation: revealTitle 1.4s ease-in-out forwards;
+    animation: revealTitle 1.8s ease-in-out forwards;
   }
 
   @keyframes revealStateBefore {
+    0% {
+      opacity: 0;
+      transform: scale(1.05);
+      visibility: hidden;
+    }
 
-    0%,
-    70% {
+    20%,
+    80% {
       opacity: 1;
       transform: scale(1);
       visibility: visible;
@@ -993,9 +1053,13 @@
   }
 
   @keyframes revealStateAfter {
+    0% {
+      opacity: 0;
+      visibility: hidden;
+    }
 
-    0%,
-    70% {
+    20%,
+    80% {
       opacity: 1;
       visibility: visible;
     }
@@ -1007,9 +1071,14 @@
   }
 
   @keyframes revealIconWrapper {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
 
-    0%,
-    70% {
+    20%,
+    80% {
       transform: translateY(60px);
       opacity: 0;
       visibility: hidden;
@@ -1023,9 +1092,12 @@
   }
 
   @keyframes revealText {
+    0% {
+      color: #ffffff;
+    }
 
-    0%,
-    70% {
+    20%,
+    80% {
       color: transparent;
     }
 
@@ -1035,32 +1107,58 @@
   }
 
   @keyframes revealLearnMore {
+    0% {
+      opacity: 0;
+      visibility: hidden;
+    }
 
-    0%,
-    70% {
+    20%,
+    80% {
       opacity: 1;
-      color: #fff;
       visibility: visible;
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      z-index: 10;
     }
 
     100% {
       opacity: 0;
-      color: transparent;
       visibility: hidden;
     }
   }
 
   @keyframes revealTitle {
+    0% {
+      transform: translateY(0);
+      z-index: 3;
+      opacity: 1;
+    }
 
-    0%,
-    70% {
-      transform: translateY(50px);
+    20%,
+    80% {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0;
       z-index: 10;
+      text-align: center;
+      opacity: 1;
     }
 
     100% {
       transform: translateY(0);
       z-index: 3;
+      opacity: 1;
     }
   }
 

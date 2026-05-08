@@ -462,7 +462,8 @@
   animation-play-state: paused;
   transform: translateX(-50%) scale(1.05);
   box-shadow: 0 14px 30px rgba(80, 160, 255, 0.9);
-  height: 48px; /* Slightly taller on hover for extra pop */
+  height: 48px;
+  /* Slightly taller on hover for extra pop */
   padding: 0 24px;
 }
 
@@ -1312,7 +1313,7 @@
   }
 
   .cb {
-    top: 173px;
+    top: 165px;
     left: 119px;
     animation-delay: 2.2s;
   }

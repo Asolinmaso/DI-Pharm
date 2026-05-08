@@ -2,10 +2,22 @@ import { useEffect, useRef, useState } from "react";
 import "./ContactSection.css";
 import Swal from "sweetalert2";
 
-const COUNTRY_RULES = {
-  "+91": { name: "India", min: 10, max: 10 },
-  "+60": { name: "Malaysia", min: 9, max: 10 },
-  "+1": { name: "USA", min: 10, max: 10 },
+const validatePhoneByCountry = (countryCode, phone) => {
+  const cleanPhone = phone.replace(/\D/g, "");
+
+  switch (countryCode) {
+    case "+91": // India
+      return /^[6-9]\d{9}$/.test(cleanPhone);
+
+    case "+1": // USA / Canada
+      return /^\d{10}$/.test(cleanPhone);
+
+    case "+60": // Malaysia
+      return /^\d{9,10}$/.test(cleanPhone);
+
+    default:
+      return cleanPhone.length >= 8 && cleanPhone.length <= 15;
+  }
 };
 
 const ContactSection = () => {
@@ -20,6 +32,25 @@ const ContactSection = () => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const countryCodes = [
+    "+91", "+1", "+44", "+61", "+60", "+65", "+971", "+49", "+33", "+81",
+    "+86", "+7", "+39", "+34", "+55", "+27", "+82", "+92", "+880", "+94",
+    "+977", "+66", "+62", "+84", "+63", "+41", "+31", "+46", "+47", "+45",
+    "+353", "+64", "+90", "+966", "+965", "+974", "+968", "+973", "+20"
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,15 +90,19 @@ const ContactSection = () => {
     else if (!emailRegex.test(formData.email.trim()))
       newErrors.email = "Enter a valid email";
     const phoneDigits = formData.phone.replace(/\D/g, "");
-    const rules = COUNTRY_RULES[formData.countryCode];
 
     if (!phoneDigits) {
       newErrors.phone = "Phone number is required";
-    } else if (
-      phoneDigits.length < rules.min ||
-      phoneDigits.length > rules.max
-    ) {
-      newErrors.phone = `Enter a valid ${rules.name} number (${rules.min}-${rules.max} digits)`;
+    } else if (!validatePhoneByCountry(formData.countryCode, formData.phone)) {
+      if (formData.countryCode === "+91") {
+        newErrors.phone = "Enter a valid 10-digit Indian mobile number";
+      } else if (formData.countryCode === "+1") {
+        newErrors.phone = "Enter a valid 10-digit US phone number";
+      } else if (formData.countryCode === "+60") {
+        newErrors.phone = "Enter a valid Malaysian phone number";
+      } else {
+        newErrors.phone = "Enter a valid phone number (8-15 digits)";
+      }
     }
 
     if (!formData.subject.trim()) newErrors.subject = "Subject is required";
@@ -302,23 +337,37 @@ const ContactSection = () => {
 
             <div className="form-group">
               <div className={`phone-input-wrapper ${errors.phone ? "input-error" : ""}`}>
-                <div className="select-wrapper">
-                  <select
-                    name="countryCode"
-                    value={formData.countryCode}
-                    onChange={handleChange}
-                    className="country-code-select"
+                <div className="select-wrapper" ref={dropdownRef}>
+                  <div
+                    className="country-code-custom"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   >
-                    <option value="+91">+91</option>
-                    <option value="+60">+60</option>
-                    <option value="+1">+1</option>
-                  </select>
+                    <span>{formData.countryCode}</span>
+                    <span className={`custom-arrow ${isDropdownOpen ? "open" : ""}`}>▼</span>
+                  </div>
+
+                  {isDropdownOpen && (
+                    <ul className="country-options-list">
+                      {countryCodes.map((code) => (
+                        <li
+                          key={code}
+                          className="country-option"
+                          onClick={() => {
+                            setFormData({ ...formData, countryCode: code });
+                            setIsDropdownOpen(false);
+                          }}
+                        >
+                          {code}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
                 <input
                   type="tel"
                   name="phone"
-                  placeholder=" Phone number"
+                  placeholder="   Phone number"
                   value={formData.phone}
                   onChange={handleChange}
                   inputMode="numeric"

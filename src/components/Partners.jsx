@@ -38,6 +38,13 @@ const Partners = () => {
     { id: 4, x: 600, y: 240, delay: "1.1s", label: "Asia" },
     { id: 5, x: 700, y: 400, delay: "1.4s", label: "Oceania" },
     { id: 6, x: 100, y: 420, delay: "1.8s", label: "atlantic" },
+    { id: 7, x: 310, y: 110, delay: "2.1s", label: "North Region" },
+    { id: 8, x: 520, y: 130, delay: "2.4s", label: "North-East Region" },
+    { id: 9, x: 160, y: 150, delay: "2.7s", label: "North-West Region" },
+    { id: 10, x: 450, y: 80, delay: "3s", label: "Polar Region" },
+    { id: 11, x: 750, y: 220, delay: "3.3s", label: "Far East" },
+    { id: 12, x: 780, y: 350, delay: "3.6s", label: "East Pacific" },
+    { id: 13, x: 680, y: 150, delay: "3.9s", label: "North Asia" },
   ];
 
   return (

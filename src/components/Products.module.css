@@ -125,22 +125,22 @@
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  top: 80px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 80px;
 }
 
 .viewButton {
-  background: #e0e0e0;
-  color: #161952;
-  border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 30px;
-  font-family: 'Poppins';
-  font-weight: 400;
-  font-size: 20px;
-  cursor: pointer;
+    background: #e0e0e0;
+    color: #161952;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 
@@ -203,9 +203,10 @@
         width: 350px;
         height: 400px;
     }
+
     .buttonContainer {
-    top: 60px;
-  }
+        top: 60px;
+    }
 }
 
 /* Mobile (up to 767px) */
@@ -271,14 +272,15 @@
     .card p {
         max-width: 100%;
     }
-    .buttonContainer {
-    top: 20px;
-  }
 
-  .viewButton {
-    font-size: 16px;
-    padding: 0.7rem 1.75rem;
-  }
+    .buttonContainer {
+        top: 10px;
+    }
+
+    .viewButton {
+        font-size: 16px;
+        padding: 0.7rem 1.75rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -313,6 +315,7 @@
         margin: 1.5rem 0;
         order: -1;
     }
+
     .centerImage::before {
         content: "";
         position: absolute;
@@ -358,16 +361,18 @@
         max-width: 90%;
         font-size: 20px;
     }
+
     .viewButton {
-    font-size: 15px;
-  }
+        font-size: 15px;
+    }
 }
 
 @media (max-width:420px) {
-    .headingContainer p{
+    .headingContainer p {
         font-size: 14px;
     }
-    .card p{
+
+    .card p {
         font-size: 14px;
     }
 }
@@ -414,16 +419,18 @@
     .grid::before {
         content: none;
     }
-    .card p{
+
+    .card p {
         font-size: 14px;
     }
 }
 
 @media (max-width: 345px) {
-    .card p{
+    .card p {
         font-size: 14px;
     }
+
     .viewButton {
-    font-size: 14px;
-  }
+        font-size: 14px;
+    }
 }
