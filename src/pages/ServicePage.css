@@ -951,118 +951,44 @@
     line-height: 1.4;
   }
 
-  /* Timed Reveal Effect for Mobile - Faster transition (1s) */
-  .service-card.in-view::before {
-    animation: revealStateBefore 1.4s ease-in-out forwards;
+  /* Active State for Mobile - Triggered by React State after 25s */
+  .service-card.active-mobile {
+    border: #fff 3px solid;
   }
 
-  .service-card.in-view::after {
-    animation: revealStateAfter 1.4s ease-in-out forwards;
+  .service-card.active-mobile::before {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
   }
 
-  .service-card.in-view .service-card-icon-wrapper {
-    animation: revealIconWrapper 1.4s ease-in-out forwards;
+  .service-card.active-mobile::after {
+    opacity: 1;
+    visibility: visible;
   }
 
-  .service-card.in-view .service-card-text {
-    animation: revealText 1.4s ease-in-out forwards;
+  .service-card.active-mobile .service-card-icon-wrapper {
+    transform: translateY(60px);
+    opacity: 0;
+    visibility: hidden;
   }
 
-  .service-card.in-view .service-card-text::after {
-    animation: revealLearnMore 1.4s ease-in-out forwards;
+  .service-card.active-mobile .service-card-text {
+    color: transparent;
   }
 
-  .service-card.in-view .service-card-title {
-    animation: revealTitle 1.4s ease-in-out forwards;
+  .service-card.active-mobile .service-card-text::after {
+    opacity: 1;
+    color: #fff;
+    visibility: visible;
   }
 
-  @keyframes revealStateBefore {
-
-    0%,
-    70% {
-      opacity: 1;
-      transform: scale(1);
-      visibility: visible;
-    }
-
-    100% {
-      opacity: 0;
-      transform: scale(1.05);
-      visibility: hidden;
-    }
+  .service-card.active-mobile .service-card-title {
+    transform: translateY(50px);
+    z-index: 10;
   }
 
-  @keyframes revealStateAfter {
-
-    0%,
-    70% {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    100% {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-
-  @keyframes revealIconWrapper {
-
-    0%,
-    70% {
-      transform: translateY(60px);
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-
-  @keyframes revealText {
-
-    0%,
-    70% {
-      color: transparent;
-    }
-
-    100% {
-      color: #ffffff;
-    }
-  }
-
-  @keyframes revealLearnMore {
-
-    0%,
-    70% {
-      opacity: 1;
-      color: #fff;
-      visibility: visible;
-    }
-
-    100% {
-      opacity: 0;
-      color: transparent;
-      visibility: hidden;
-    }
-  }
-
-  @keyframes revealTitle {
-
-    0%,
-    70% {
-      transform: translateY(50px);
-      z-index: 10;
-    }
-
-    100% {
-      transform: translateY(0);
-      z-index: 3;
-    }
-  }
+  /* Existing reveal keyframes can be removed or kept as they are no longer used by default */
 
   /* Community section */
   .service-community-section {

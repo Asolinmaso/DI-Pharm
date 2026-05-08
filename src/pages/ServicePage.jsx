@@ -78,6 +78,31 @@ const ServicePage = () => {
   const formRef = useRef(null);
   const navigate = useNavigate();
 
+  const [activeMobileCard, setActiveMobileCard] = useState(null);
+
+  useEffect(() => {
+    // Check if we are on mobile
+    const isMobile = window.innerWidth <= 767;
+    if (!isMobile) return;
+
+    // After 25 seconds, highlight the 2nd card (index 1)
+    const timer = setTimeout(() => {
+      setActiveMobileCard(1);
+    }, 25000); // 25 seconds delay
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleCardClick = (index) => {
+    // If it's the active card on mobile, scroll to contact
+    if (window.innerWidth <= 767 && activeMobileCard === index) {
+      const contactSection = document.getElementById("community");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
 
@@ -261,7 +286,10 @@ const ServicePage = () => {
 
       {/* Services Cards */}
       <section className="service-cards-section" ref={cardsRef}>
-        <div className="service-card card-1">
+        <div
+          className={`service-card card-1 ${activeMobileCard === 0 ? "active-mobile" : ""}`}
+          onClick={() => handleCardClick(0)}
+        >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
               <img
@@ -276,7 +304,10 @@ const ServicePage = () => {
             </p>
           </div>
         </div>
-        <div className="service-card card-2">
+        <div
+          className={`service-card card-2 ${activeMobileCard === 1 ? "active-mobile" : ""}`}
+          onClick={() => handleCardClick(1)}
+        >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
               <img
@@ -291,7 +322,10 @@ const ServicePage = () => {
             </p>
           </div>
         </div>
-        <div className="service-card card-3">
+        <div
+          className={`service-card card-3 ${activeMobileCard === 2 ? "active-mobile" : ""}`}
+          onClick={() => handleCardClick(2)}
+        >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
               <img src={lab} alt="Service Icon" className="service-card-icon" />
@@ -302,7 +336,10 @@ const ServicePage = () => {
             </p>
           </div>
         </div>
-        <div className="service-card card-4">
+        <div
+          className={`service-card card-4 ${activeMobileCard === 3 ? "active-mobile" : ""}`}
+          onClick={() => handleCardClick(3)}
+        >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
               <img
@@ -317,7 +354,10 @@ const ServicePage = () => {
             </p>
           </div>
         </div>
-        <div className="service-card card-5">
+        <div
+          className={`service-card card-5 ${activeMobileCard === 4 ? "active-mobile" : ""}`}
+          onClick={() => handleCardClick(4)}
+        >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
               <img
@@ -332,7 +372,10 @@ const ServicePage = () => {
             </p>
           </div>
         </div>
-        <div className="service-card card-6">
+        <div
+          className={`service-card card-6 ${activeMobileCard === 5 ? "active-mobile" : ""}`}
+          onClick={() => handleCardClick(5)}
+        >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
               {/* Using lab icon as placeholder for hospital building if specific icon not found */}
