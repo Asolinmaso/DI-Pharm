@@ -2,10 +2,12 @@ import "./Footer.css";
 import logo from "../assets/logo1.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import partners from "../assets/brands/footer_partners.png";
 import indoPartner from "../assets/brands/idocontinental_partners.png";
 import drwill from "../assets/brands/drwill_partners.png";
 import diwholesale from "../assets/brands/diwholesale.jpeg";
+import footerImg from "../assets/brands/footer.png";
+import footer1Img from "../assets/brands/footer 1.png";
+import footer2Img from "../assets/brands/footer 2.png";
 
 const Footer = () => {
   const titleRef = useRef(null);
@@ -45,7 +47,7 @@ const Footer = () => {
           <div className="footer-column footer-company">
             <div className="footer-logo">
               <Link to={"/"}>
-                <img src={logo} alt="D Pharma Logo" className="logo-image" />
+                <img src={logo} alt="DI Pharma Logo" className="logo-image" />
               </Link>
             </div>
             <p className="footer-description">
@@ -129,6 +131,9 @@ const Footer = () => {
                 <img src={indoPartner} alt="" />
                 <img src={drwill} alt="" />
                 <img src={diwholesale} alt="" />
+                <img src={footerImg} alt="Partner Footer" />
+                <img src={footer1Img} alt="Partner Footer 1" />
+                <img src={footer2Img} alt="Partner Footer 2" />
               </div>
             </div>
           </div>
@@ -152,19 +157,13 @@ const Footer = () => {
           </div>
 
           <div className="footer-column">
-            <h3 className="footer-heading">Support</h3>
+            <h3 className="footer-heading">Legal</h3>
             <ul className="footer-links">
               <li>
-                <Link to={"/contact"}>Help Centre</Link>
+                <Link to={"/privacy"}>Privacy Policy</Link>
               </li>
               <li>
-                <Link to={"/contact"}>Contact Us</Link>
-              </li>
-              <li>
-                <Link to={"/contact#faq"}>FAQ</Link>
-              </li>
-              <li>
-                <Link to={"/services#community"}>Community</Link>
+                <Link to={"/terms"}>Terms & Conditions</Link>
               </li>
             </ul>
           </div>

@@ -9,24 +9,24 @@ const FAQSection = () => {
 
   const faqs = [
     {
-      question: "What is D Pharma?",
+      question: "What is DI Pharma Innovation?",
       answer:
         "Diverse Innovation Pharmaceuticals Pvt. Ltd. is a growing healthcare organization committed to delivering comprehensive and accessible medical services to the community.",
     },
     {
-      question: "How D Pharma works?",
+      question: "How does DI Pharma work?",
       answer:
-        "D Pharma operates as a comprehensive healthcare organization, providing accessible medical services through innovative solutions and a patient-centered approach. We work to bridge the gap between healthcare providers and patients, ensuring quality care is available to all.",
+        "DI Pharma operates as a comprehensive healthcare organization focused on delivering accessible, reliable, and patient-centered medical services. Through our integrated approach in diagnostics, research, pharmaceutical solutions, and wholesale healthcare support, we bridge the gap between healthcare providers and patients while ensuring quality care, efficient service, and trusted medical solutions for all.",
     },
     {
       question: "What are the services?",
       answer:
-        "D Pharma offers a wide range of healthcare services including pharmaceutical solutions, medical consultations, health management programs, and comprehensive medical support services tailored to meet the diverse needs of our community.",
+        "DI Pharma offers a wide range of healthcare services including pharmaceutical solutions, diagnostics, medical consultations, research support, wholesale supply, and comprehensive health management programs. We are committed to providing reliable medical support services tailored to meet the diverse healthcare needs of our community.",
     },
     {
       question: "How can I access your services?",
       answer:
-        "You can easily access our services by contacting us directly or visiting our facility, where our team will guide you through the process and assist you based on your requirements.",
+        "You can easily access our services by contacting us directly, visiting our facility, or filling out the contact form on our website. Our team will review your requirements and get in touch with you shortly to guide you through the process and provide the right assistance based on your needs.",
     },
   ];
   useEffect(() => {

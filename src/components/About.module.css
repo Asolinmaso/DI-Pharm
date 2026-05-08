@@ -341,7 +341,7 @@
     max-width: 320px;
   }
 
-  .imageCard{
+  .imageCard {
     border: 2px solid #ffffff;
   }
 
@@ -467,7 +467,7 @@
     height: 30px;
   }
 
-  .badge svg{
+  .badge svg {
     width: 20px;
     height: 20px;
   }
@@ -490,7 +490,7 @@
   .textContent::before {
     content: none;
   }
-  
+
 }
 
 /* Extra small mobile */
@@ -565,7 +565,7 @@
     height: 30px;
   }
 
-  .badge svg{
+  .badge svg {
     width: 20px;
     height: 20px;
   }
@@ -627,7 +627,7 @@
     height: 30px;
   }
 
-  .badge svg{
+  .badge svg {
     width: 20px;
     height: 20px;
   }
@@ -646,5 +646,5 @@
     position: relative;
     font-size: 10px;
   }
-  
+
 }

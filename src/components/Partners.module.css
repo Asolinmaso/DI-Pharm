@@ -69,7 +69,8 @@
 /* BRAND STRIP */
 .brands_section {
     padding: 10px 0;
-    padding-right: 58px; /* Matches gap for seamless loop */
+    padding-right: 58px;
+    /* Matches gap for seamless loop */
     height: 70px;
 
     display: flex;
@@ -101,7 +102,8 @@
     height: 80px;
     opacity: 53%;
 }
-.g7{
+
+.g7 {
     height: 100px;
     opacity: 53%;
 }
@@ -316,7 +318,8 @@
         height: 40px;
         opacity: 53%;
     }
-    .g7{
+
+    .g7 {
         height: 60px;
         opacity: 53%;
     }
@@ -366,7 +369,8 @@
         height: 45px;
         opacity: 53%;
     }
-    .g7{
+
+    .g7 {
         height: 55px;
         opacity: 53%;
     }
@@ -416,7 +420,8 @@
         height: 38px;
         opacity: 53%;
     }
-    .g7{
+
+    .g7 {
         height: 45px;
         opacity: 53%;
     }
