@@ -110,9 +110,12 @@ const ServicePage = () => {
 
 
 
-  const handleCardClick = (e) => {
-    e.stopPropagation();
-    navigate("/404");
+  const handleCardClick = (url) => {
+    if (url.startsWith("http")) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    } else {
+      navigate(url);
+    }
   };
 
   // const handleChange = (e) => {
@@ -300,7 +303,7 @@ const ServicePage = () => {
       <section className="service-cards-section" ref={cardsRef}>
         <div
           className={`service-card card-1 ${activeCard === 0 ? "auto-active" : ""}`}
-          onClick={handleCardClick}
+          onClick={() => handleCardClick("https://doctorwil.com/")}
         >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
@@ -318,7 +321,7 @@ const ServicePage = () => {
         </div>
         <div
           className={`service-card card-2 ${activeCard === 1 ? "auto-active" : ""}`}
-          onClick={handleCardClick}
+          onClick={() => handleCardClick("/404")}
         >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
@@ -336,7 +339,7 @@ const ServicePage = () => {
         </div>
         <div
           className={`service-card card-3 ${activeCard === 2 ? "auto-active" : ""}`}
-          onClick={handleCardClick}
+          onClick={() => handleCardClick("https://diagnostics.dipharmainnovation.com/")}
         >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
@@ -350,7 +353,7 @@ const ServicePage = () => {
         </div>
         <div
           className={`service-card card-4 ${activeCard === 3 ? "auto-active" : ""}`}
-          onClick={handleCardClick}
+          onClick={() => handleCardClick("https://research.dipharmainnovation.com/")}
         >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
@@ -368,7 +371,7 @@ const ServicePage = () => {
         </div>
         <div
           className={`service-card card-5 ${activeCard === 4 ? "auto-active" : ""}`}
-          onClick={handleCardClick}
+          onClick={() => handleCardClick("https://indocontinental7.com/")}
         >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
@@ -386,7 +389,7 @@ const ServicePage = () => {
         </div>
         <div
           className={`service-card card-6 ${activeCard === 5 ? "auto-active" : ""}`}
-          onClick={handleCardClick}
+          onClick={() => handleCardClick("https://polyclinicsandhospitals.dipharmainnovation.com/")}
         >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">

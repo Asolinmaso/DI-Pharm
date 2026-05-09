@@ -51,7 +51,7 @@ export default function NetworkDiagram() {
         {/* BLUE BUILDINGS */}
         <div className="server-wrap lt">
           <img src={blue} className="server blue" alt="" />
-          <button className="server-btn">
+          <a href="https://doctorwil.com/" target="_blank" rel="noopener noreferrer" className="server-btn">
             <span className="btn-text">Dr.will</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
@@ -74,12 +74,12 @@ export default function NetworkDiagram() {
                 </g>
               </svg>
             </span>
-          </button>
+          </a>
         </div>
 
         <div className="server-wrap rt">
           <img src={blue} className="server blue" alt="" />
-          <button className="server-btn">
+          <a href="https://research.dipharmainnovation.com/" target="_blank" rel="noopener noreferrer" className="server-btn">
             <span className="btn-text">Di Research</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
@@ -102,12 +102,12 @@ export default function NetworkDiagram() {
                 </g>
               </svg>
             </span>
-          </button>
+          </a>
         </div>
 
         <div className="server-wrap ct">
           <img src={blue} className="server blue" alt="" />
-          <button className="server-btn">
+          <a href="https://polyclinicsandhospitals.dipharmainnovation.com/" target="_blank" rel="noopener noreferrer" className="server-btn">
             <span className="btn-text">Di hospitals</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
@@ -130,7 +130,7 @@ export default function NetworkDiagram() {
                 </g>
               </svg>
             </span>
-          </button>
+          </a>
         </div>
 
         <div className="server-wrap lb">
@@ -163,7 +163,7 @@ export default function NetworkDiagram() {
 
         <div className="server-wrap rb">
           <img src={blue} className="server blue" alt="" />
-          <button className="server-btn">
+          <a href="https://diagnostics.dipharmainnovation.com/" target="_blank" rel="noopener noreferrer" className="server-btn">
             <span className="btn-text">Di scans</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
@@ -186,13 +186,13 @@ export default function NetworkDiagram() {
                 </g>
               </svg>
             </span>
-          </button>
+          </a>
         </div>
 
         {/* WHITE BUILDINGS */}
         <div className="server-wrap wl">
           <img src={white} className="server white" alt="" />
-          <button className="server-btn">
+          <a href="https://indocontinental7.com/" target="_blank" rel="noopener noreferrer" className="server-btn">
             <span className="btn-text">Indo Continental 7</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
@@ -215,12 +215,12 @@ export default function NetworkDiagram() {
                 </g>
               </svg>
             </span>
-          </button>
+          </a>
         </div>
 
         <div className="server-wrap wr">
           <img src={white} className="server white" alt="" />
-          <button className="server-btn">
+          <a href="https://diagnostics.dipharmainnovation.com/" target="_blank" rel="noopener noreferrer" className="server-btn">
             <span className="btn-text">Di laboratories</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
@@ -243,12 +243,12 @@ export default function NetworkDiagram() {
                 </g>
               </svg>
             </span>
-          </button>
+          </a>
         </div>
 
         <div className="server-wrap cb">
           <img src={white} className="server white" alt="" />
-          <button className="server-btn">
+          <a href="https://polyclinicsandhospitals.dipharmainnovation.com/" target="_blank" rel="noopener noreferrer" className="server-btn">
             <span className="btn-text">Di polyclinics</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
@@ -271,7 +271,7 @@ export default function NetworkDiagram() {
                 </g>
               </svg>
             </span>
-          </button>
+          </a>
         </div>
 
         {/* CENTER */}
@@ -280,7 +280,7 @@ export default function NetworkDiagram() {
 
           <div className="server-wrap center">
             <img src={white} className="server white" alt="" />
-            <button className="server-btn">
+            <a href="https://www.dipharmainnovation.com" target="_blank" rel="noopener noreferrer" className="server-btn">
               <span className="btn-text">DI Pharma</span>
               <span className="btn-arrow">
                 <svg width="26" height="18" viewBox="0 0 66 43">
@@ -303,7 +303,7 @@ export default function NetworkDiagram() {
                   </g>
                 </svg>
               </span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
