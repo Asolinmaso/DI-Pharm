@@ -192,12 +192,13 @@ const ContactSection = () => {
           <div className="info-item">
             <h3 className="info-label">Contact</h3>
             <div className="info-value">
-              <p>+91-9677787817</p>
+              <p>+91-9677787817 / +91-7397787817 /</p>
+              <p>+91-8778359643</p>
             </div>
           </div>
 
           <div className="info-item">
-            <h3 className="info-label">Address</h3>
+            <h3 className="info-label">Corporate Office</h3>
             <p className="info-value">
               No.18, Velan Avenue, Rice Mill Road, Kandigai, Chennai – 600127
             </p>

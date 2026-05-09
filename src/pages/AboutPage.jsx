@@ -97,9 +97,9 @@ const AboutPage = () => {
         <div className="about-hero-container">
           <div className="about-hero-content">
             <p className="about-kicker">ABOUT</p>
-            <h1 className="about-title">Di Pharma Innovation</h1>
+            <h1 className="about-title">DI Pharma Innovation</h1>
             <p className="about-description">
-              Di Pharma Innovation is a forward-thinking pharmaceutical and
+              DI Pharma Innovation is a forward-thinking pharmaceutical and
               healthcare solutions provider committed to improving access to
               quality medical products. With a strong focus on reliability,
               innovation, and customer satisfaction.
@@ -201,7 +201,7 @@ const AboutPage = () => {
         <div className="commitment-content">
           <h2 className="commitment-title">Our Commitment</h2>
           <p className="commitment-text">
-            At <strong>Di Pharma Innovation,</strong> we believe{" "}
+            At <strong>DI Pharma Innovation,</strong> we believe{" "}
             <strong>healthcare is more than a business </strong> - it's a{" "}
             <strong> responsibility</strong>. Our commitment to{" "}
             <strong>excellence</strong> drives us to provide products that

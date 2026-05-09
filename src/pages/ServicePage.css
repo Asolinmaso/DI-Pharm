@@ -141,9 +141,11 @@
   box-shadow: -10px 10px #FFFFFFBD;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.service-card:hover {
+.service-card:hover,
+.service-card.auto-active {
   border: #fff 3px solid;
 }
 
@@ -160,6 +162,13 @@
   z-index: 1;
 }
 
+.service-card:hover::before,
+.service-card.auto-active::before {
+  opacity: 1;
+  transform: scale(1);
+  inset: 0;
+}
+
 .service-card::after {
   content: "";
   position: absolute;
@@ -168,6 +177,13 @@
   opacity: 0;
   transition: opacity 0.45s ease;
   z-index: 2;
+}
+
+.service-card:hover::after,
+.service-card.auto-active::after {
+  opacity: 1;
+  inset: 0;
+  background: rgba(22, 25, 82, 0.3);
 }
 
 .service-card-inner {
@@ -181,12 +197,16 @@
 
 .service-card-icon-wrapper {
   margin-bottom: 18px;
-  transition: transform 0.40s ease, opacity 0.45s ease;
+  transition: transform 0.40s ease, opacity 0.45s ease, height 0.4s ease, margin 0.4s ease;
+  overflow: hidden;
 }
 
-.service-card:hover .service-card-icon-wrapper {
-  transform: translateY(60px);
+.service-card:hover .service-card-icon-wrapper,
+.service-card.auto-active .service-card-icon-wrapper {
+  transform: translateY(-20px);
   opacity: 0;
+  height: 0;
+  margin-bottom: 0;
 }
 
 .service-card-icon {
@@ -201,6 +221,14 @@
   font-weight: 550;
   color: #ffffff;
   margin-bottom: 10px;
+  transition: transform 0.4s ease, font-size 0.4s ease;
+}
+
+.service-card:hover .service-card-title,
+.service-card.auto-active .service-card-title {
+  transform: translateY(40px);
+  font-size: 28px;
+  font-weight: 700;
 }
 
 
@@ -212,7 +240,8 @@
   max-width: 330px;
 }
 
-.service-card:hover .service-card-text {
+.service-card:hover .service-card-text,
+.service-card.auto-active .service-card-text {
   font-size: 16px;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -227,26 +256,23 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  display: block;
 }
 
-.service-card:hover .service-card-text {
+.service-card:hover .service-card-text,
+.service-card.auto-active .service-card-text {
   color: transparent;
 }
 
-.service-card:hover .service-card-text::after {
+.service-card:hover .service-card-text::after,
+.service-card.auto-active .service-card-text::after {
   opacity: 1;
   color: #fff;
+  transform: translateY(50px);
 }
 
-.service-card:hover::before {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.service-card:hover::after {
-  opacity: 1;
-}
+/* Removed duplicate hover rules handled above */
 
 /* transition for the service cards */
 .service-card {
@@ -878,6 +904,13 @@
 
 /* Mobile (up to 767px) */
 @media (max-width: 767px) {
+
+  /* Force service cards to be always visible on mobile */
+  .service-card {
+    opacity: 1 !important;
+    transform: translate(0, 0) !important;
+  }
+
   .service-hero {
     height: fit-content;
   }
@@ -923,244 +956,34 @@
 
   .service-card {
     width: 100%;
-    max-width: 100%;
+    max-width: 360px;
     height: 350px;
+    margin: 0 auto;
+    box-shadow: -10px 10px #FFFFFFBD;
   }
 
   .service-card-inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 15px;
+    display: block;
+    padding: 20px;
     height: 100%;
     text-align: center;
   }
 
   .service-card-title {
-    font-size: 18px;
-    margin-top: 5px;
+    font-size: 24px;
     line-height: 1.2;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .service-card-text {
-    font-size: 11.5px;
+    font-size: 13px;
     padding: 0 5px;
     max-width: 100%;
   }
 
-  /* Active State for Mobile - Persistent state triggered by manual tap */
-  .service-card.active-mobile::before {
-    opacity: 1;
-    transform: scale(1);
-    visibility: visible;
-  }
 
-  .service-card.active-mobile::after {
-    opacity: 1;
-    visibility: visible;
-  }
 
-  .service-card.active-mobile .service-card-icon-wrapper {
-    transform: translateY(60px);
-    opacity: 0;
-    visibility: hidden;
-  }
 
-  .service-card.active-mobile .service-card-text {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .service-card.active-mobile .service-card-title {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    font-size: 22px; /* Slightly smaller to prevent overflow */
-    font-weight: 700;
-    line-height: 1.2;
-    margin: 0;
-    z-index: 10;
-    text-align: center;
-    color: #fff;
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .service-card.active-mobile::after {
-    /* Ensure the Learn More text is correctly positioned */
-    content: "Learn More →";
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    z-index: 10;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.3s ease;
-  }
-
-  /* Reveal Animation for Mobile - Triggered by .in-view class on scroll */
-  .service-card.in-view::before {
-    animation: revealStateBefore 1.8s ease-in-out forwards;
-  }
-
-  .service-card.in-view::after {
-    animation: revealStateAfter 1.8s ease-in-out forwards;
-  }
-
-  .service-card.in-view .service-card-icon-wrapper {
-    animation: revealIconWrapper 1.8s ease-in-out forwards;
-  }
-
-  .service-card.in-view .service-card-text {
-    animation: revealText 1.8s ease-in-out forwards;
-  }
-
-  .service-card.in-view .service-card-text::after {
-    animation: revealLearnMore 1.8s ease-in-out forwards;
-  }
-
-  .service-card.in-view .service-card-title {
-    animation: revealTitle 1.8s ease-in-out forwards;
-  }
-
-  @keyframes revealStateBefore {
-    0% {
-      opacity: 0;
-      transform: scale(1.05);
-      visibility: hidden;
-    }
-
-    20%,
-    80% {
-      opacity: 1;
-      transform: scale(1);
-      visibility: visible;
-    }
-
-    100% {
-      opacity: 0;
-      transform: scale(1.05);
-      visibility: hidden;
-    }
-  }
-
-  @keyframes revealStateAfter {
-    0% {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    20%,
-    80% {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    100% {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-
-  @keyframes revealIconWrapper {
-    0% {
-      transform: translateY(0);
-      opacity: 1;
-      visibility: visible;
-    }
-
-    20%,
-    80% {
-      transform: translateY(60px);
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-
-  @keyframes revealText {
-    0% {
-      color: #ffffff;
-    }
-
-    20%,
-    80% {
-      color: transparent;
-    }
-
-    100% {
-      color: #ffffff;
-    }
-  }
-
-  @keyframes revealLearnMore {
-    0% {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    20%,
-    80% {
-      opacity: 1;
-      visibility: visible;
-      position: absolute;
-      top: 65%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-size: 16px;
-      font-weight: 500;
-      z-index: 10;
-    }
-
-    100% {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-
-  @keyframes revealTitle {
-    0% {
-      transform: translateY(0);
-      z-index: 3;
-      opacity: 1;
-    }
-
-    20%,
-    80% {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      font-size: 22px;
-      font-weight: 700;
-      line-height: 1.2;
-      margin: 0;
-      z-index: 10;
-      text-align: center;
-      opacity: 1;
-    }
-
-    100% {
-      transform: translateY(0);
-      z-index: 3;
-      opacity: 1;
-    }
-  }
 
   /* Community section */
   .service-community-section {
