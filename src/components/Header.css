@@ -121,18 +121,16 @@
   right: -3px;
   bottom: -3px;
 
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000
-  );
+  background: linear-gradient(45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #48ff00,
+      #00ffd5,
+      #002bff,
+      #7a00ff,
+      #ff00c8,
+      #ff0000);
 
   background-size: 400%;
   filter: blur(8px);
@@ -168,9 +166,17 @@
 
 /* ---------------- GLOW ANIMATION ---------------- */
 @keyframes glowing {
-  0% { background-position: 0 0; }
-  50% { background-position: 400% 0; }
-  100% { background-position: 0 0; }
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
 }
 
 
@@ -212,6 +218,14 @@
   transform: rotate(-45deg) translate(3px, -3px);
 }
 
+
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
 
 /* Responsive Design */
 
@@ -282,7 +296,13 @@
     font-size: 18px;
   }
 
-  .book-appointment-btn {
+  .book-appointment-btn.mobile-only {
+    display: flex;
+    margin-top: 1rem;
+    margin-right: 0;
+  }
+
+  .book-appointment-btn.desktop-only {
     display: none;
   }
 
@@ -321,7 +341,7 @@
     transition: all 0.3s ease;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     align-items: flex-start;
-     text-align: left;
+    text-align: left;
   }
 
   .nav-open {
@@ -334,7 +354,13 @@
     font-size: 16px;
   }
 
-  .book-appointment-btn {
+  .book-appointment-btn.mobile-only {
+    display: flex;
+    margin-top: 1rem;
+    margin-right: 0;
+  }
+
+  .book-appointment-btn.desktop-only {
     display: none;
   }
 

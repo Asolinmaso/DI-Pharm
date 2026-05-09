@@ -104,7 +104,7 @@ const Footer = () => {
                   />
                 </svg>
               </a>
-              <a href="https://www.instagram.com/di_pharma_innovation/" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Instagram">
+              <a href="https://www.instagram.com/diverse_innovation_pharma/" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Instagram">
                 <svg
                   width="32"
                   height="32"
@@ -156,7 +156,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="footer-column">
+          <div className="footer-column footer-legal">
             <h3 className="footer-heading">Legal</h3>
             <ul className="footer-links">
               <li>
@@ -283,7 +283,7 @@ const Footer = () => {
                   />
                 </svg>
               </a>
-              <a href="https://www.instagram.com/di_pharma_innovation/" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Instagram">
+              <a href="https://www.instagram.com/diverse_innovation_pharma/" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Instagram">
                 <svg
                   width="32"
                   height="32"

@@ -264,7 +264,7 @@ const ContactSection = () => {
                   />
                 </svg>
               </a>
-              <a href="https://www.instagram.com/di_pharma_innovation/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Instagram">
+              <a href="https://www.instagram.com/diverse_innovation_pharma/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Instagram">
                 <svg
                   width="32"
                   height="32"
