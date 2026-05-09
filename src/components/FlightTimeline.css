@@ -30,12 +30,13 @@
   width: 100%;
   max-width: 1530px;
   position: absolute;
-  top: 0;
+  top: 60px;
   left: 0;
   height: 100%;
   z-index: 0;
   pointer-events: none;
 }
+
 
 /* Responsive Styles for Flight Timeline */
 
@@ -188,7 +189,7 @@
 
 @media (max-width: 330px) {
   .flight-svg {
-    top: 155px;
+    top: 180px;
   }
 
   .flight-svg svg {
@@ -199,7 +200,7 @@
 
 @media (max-width: 315px) {
   .flight-svg {
-    top: 170px;
+    top: 224px;
   }
 
   .flight-svg svg {
@@ -211,7 +212,7 @@
 
 @media (max-width: 310px) {
   .flight-svg {
-    top: 120px;
+    top: 241px;
   }
 
   .flight-svg svg {
