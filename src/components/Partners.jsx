@@ -144,6 +144,12 @@ const Partners = () => {
   animation-delay: var(--delay);
 }
 
+@media (min-width: 1024px) {
+  .desktop-hide {
+    display: none;
+  }
+}
+
         `}</style>
 
         {/* ===== SVG OVERLAY ===== */}
@@ -214,7 +220,11 @@ const Partners = () => {
           </defs>
 
           {pins.map((pin) => (
-            <g key={pin.id} transform={`translate(${pin.x}, ${pin.y})`}>
+            <g 
+              key={pin.id} 
+              transform={`translate(${pin.x}, ${pin.y})`}
+              className={pin.id > 5 ? "desktop-hide" : ""}
+            >
               <g className="pin-container" style={{ "--delay": pin.delay }}>
                 {/* Pulse ring (smaller) */}
                 <circle

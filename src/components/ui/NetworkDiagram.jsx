@@ -135,7 +135,7 @@ export default function NetworkDiagram() {
 
         <div className="server-wrap lb">
           <img src={blue} className="server blue" alt="" />
-          <button className="server-btn">
+          <a href="https://diwholesale.dipharmainnovation.com/" target="_blank" rel="noopener noreferrer" className="server-btn">
             <span className="btn-text">Di WholeSale</span>
             <span className="btn-arrow">
               <svg width="26" height="18" viewBox="0 0 66 43">
@@ -158,7 +158,7 @@ export default function NetworkDiagram() {
                 </g>
               </svg>
             </span>
-          </button>
+          </a>
         </div>
 
         <div className="server-wrap rb">

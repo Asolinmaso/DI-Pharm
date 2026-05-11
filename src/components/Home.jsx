@@ -1,12 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import styles from "./Home.module.css";
+import { useNavigate } from "react-router-dom";
 import IsometricNetwork from "./IsometricNetwork";
 import BuildSvg from "../assets/about/home.svg?react";
 import HeroSection from "./HeroSection";
 import NetworkDiagram from "./ui/NetworkDiagram";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <section className={styles.hero}>
@@ -53,11 +55,12 @@ const Home = () => {
         <div className={styles.bottomLeft}>
           <div className={styles.social}>
             <span>Follow Us – </span>
-            <a href="#">Instagram.</a> <a href="#">Linked In.</a>{" "}
-            <a href="#">Facebook</a>
+            <a href="https://www.instagram.com/diverse_innovation_pharma/" target="_blank" rel="noopener noreferrer">Instagram.</a>{" "}
+            <a href="https://www.linkedin.com/company/di-pharma-innovation-pvt-ltd/" target="_blank" rel="noopener noreferrer">Linked In.</a>{" "}
+            <a href="https://www.facebook.com/profile.php?id=61571431221147" target="_blank" rel="noopener noreferrer">Facebook</a>
           </div>
           <div className={styles.exploreWrapper}>
-            <button className={styles.exploreButton}>Explore More</button>
+            <button className={styles.exploreButton} onClick={() => navigate("/services")}>Explore More</button>
           </div>
         </div>
 

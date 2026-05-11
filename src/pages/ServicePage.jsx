@@ -321,7 +321,7 @@ const ServicePage = () => {
         </div>
         <div
           className={`service-card card-2 ${activeCard === 1 ? "auto-active" : ""}`}
-          onClick={() => handleCardClick("/404")}
+          onClick={() => handleCardClick("https://diwholesale.dipharmainnovation.com/")}
         >
           <div className="service-card-inner">
             <div className="service-card-icon-wrapper">
