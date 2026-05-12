@@ -206,7 +206,7 @@ const Footer = () => {
               <div className="footer-contact-address">
                 <p>Corporate Office:</p>
                 <a
-                  href="https://maps.app.goo.gl/tWf7yn3a2a17tGt9A"
+                  href="https://www.google.com/maps/place/DR.DI+PHARMA+CLINIC+NURSING+HOME+AND+PHARMA+WHOLE+SELLER/@12.8512024,80.1377012,17z/data=!3m1!4b1!4m6!3m5!1s0x3a525979fd195929:0xb7cd9c7ebf6fc1aa!8m2!3d12.8512024!4d80.1377012!16s%2Fg%2F11yhwd_v0t"
                   className="address-link"
                   target="_blank"
                   rel="noopener noreferrer"

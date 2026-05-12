@@ -77,3 +77,18 @@
     stroke-dashoffset: -28;
   }
 }
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+  .network-svg {
+    max-width: 700px;
+  }
+}
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+  .network-svg {
+    max-width: 100%;
+    transform: scale(0.9);
+  }
+}
