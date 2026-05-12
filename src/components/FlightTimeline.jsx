@@ -28,7 +28,7 @@ const pins = [
     year: "2025",
     title: "DI Wholesale",
     align: "right",
-    position: 0.61,
+    position: 0.58,
   },
   {
     year: "2025",
@@ -37,10 +37,10 @@ const pins = [
     position: 0.50,
   },
   {
-    year: "2026",
+    year: "Coming Soon",
     title: "DI Diagnostics",
     align: "right",
-    position: 0.40,
+    position: 0.36,
   },
   {
     year: "Coming Soon",
@@ -71,6 +71,7 @@ function RoadPin({ refProp, year, title }) {
   const titleRef = useRef(null);
   const yearRef = useRef(null);
   const [boxWidth, setBoxWidth] = useState(120);
+  const [badgeWidth, setBadgeWidth] = useState(0);
 
   const PADDING_X = 16;
   // const PADDING_Y = 14;
@@ -83,6 +84,7 @@ function RoadPin({ refProp, year, title }) {
       const maxTextWidth = Math.max(titleWidth, yearWidth);
 
       setBoxWidth(maxTextWidth + PADDING_X * 2);
+      setBadgeWidth(yearWidth + 8);
     }
   }, [title, year]);
 
@@ -102,21 +104,36 @@ function RoadPin({ refProp, year, title }) {
 
       {/* LABEL BELOW PIN */}
       <g
-        transform={`translate(${12 - boxWidth / 2}, 38)`}
+        transform={`translate(${12 - boxWidth / 2}, 44)`}
       >
         <rect
           width={boxWidth}
-          height={54}
+          height={40}
           rx="10"
           fill="#D7D7ED"
+          style={{ transition: "all 0.3s ease" }}
         />
+
+        {year === "Coming Soon" && (
+          <rect
+            x={PADDING_X - 4}
+            y={8}
+            width={badgeWidth}
+            height={16}
+            rx="4"
+            fill="#2a3170"
+            opacity="0.1"
+          />
+        )}
 
         <text
           ref={yearRef}
           x={PADDING_X}
-          y={22}
-          fontSize="11"
-          fontWeight="600"
+          y={20}
+          fontSize="10"
+          fontWeight="700"
+          fill={year === "Coming Soon" ? "#2a3170" : "#1c2a6d"}
+          style={{ textTransform: "uppercase", letterSpacing: "0.5px" }}
         >
           {year}
         </text>
@@ -124,8 +141,10 @@ function RoadPin({ refProp, year, title }) {
         <text
           ref={titleRef}
           x={PADDING_X}
-          y={40}
-          fontSize="12"
+          y={32}
+          fontSize="13"
+          fontWeight="500"
+          fill="#111827"
         >
           {title}
         </text>
@@ -207,8 +226,9 @@ export default function FlightTimeline() {
       activatePin(pinRefs.current[index], false);
     });
 
+    const firstComingSoonPin = pins.find(p => p.year === "Coming Soon");
+    const FLIGHT_END = firstComingSoonPin ? firstComingSoonPin.position + 0.03 : 0.1;
     const FLIGHT_START = 1;
-    const FLIGHT_END = 0.3;
     const TOTAL_DURATION = 6;
 
     // Track activation state (cleaner than dataset)
@@ -315,4 +335,4 @@ export default function FlightTimeline() {
       </svg>
     </div>
   );
-}
+}       

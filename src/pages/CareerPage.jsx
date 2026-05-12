@@ -148,8 +148,11 @@ const CareerPage = () => {
     const newErrors = {};
 
     // Name validation
+    const nameRegex = /^[a-zA-Z\s]+$/;
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
+    } else if (!nameRegex.test(formData.name.trim())) {
+      newErrors.name = "Name should only contain letters";
     } else if (formData.name.trim().length < 5) {
       newErrors.name = "Name must be at least 5 characters";
     }
@@ -230,6 +233,23 @@ const CareerPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Allow ONLY letters and spaces for name field
+    if (name === "name") {
+      const alphaValue = value.replace(/[^a-zA-Z\s]/g, "");
+      setFormData({ ...formData, name: alphaValue });
+      if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
+      return;
+    }
+
+    // Allow ONLY numbers for phone field
+    if (name === "phone") {
+      const numericValue = value.replace(/[^0-9]/g, "");
+      setFormData({ ...formData, phone: numericValue });
+      if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
+      return;
+    }
+
     setFormData({ ...formData, [name]: value });
     // Clear error when user starts typing
     if (errors[name]) {
@@ -480,11 +500,11 @@ const CareerPage = () => {
                           ...prev,
                           role: role.title,
                         }));
-                        document
-                          .getElementById("career-contact")
-                          ?.scrollIntoView({
-                            behavior: "smooth",
-                          });
+                        if (formRef.current) {
+                          const yOffset = window.innerWidth > 767 ? -120 : -80;
+                          const y = formRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                          window.scrollTo({ top: y, behavior: "smooth" });
+                        }
                       }}
                     >
                       <div className="role-details">

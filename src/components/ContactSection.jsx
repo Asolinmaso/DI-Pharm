@@ -57,15 +57,17 @@ const ContactSection = () => {
 
     // Allow ONLY numbers for phone field
     if (name === "phone") {
-      // Remove non-numeric characters
       const numericValue = value.replace(/[^0-9]/g, "");
-
-      setFormData({
-        ...formData,
-        phone: numericValue,
-      });
-
+      setFormData({ ...formData, phone: numericValue });
       setErrors((prev) => ({ ...prev, phone: "" }));
+      return;
+    }
+
+    // Allow ONLY letters and spaces for name fields
+    if (name === "firstName" || name === "lastName") {
+      const alphaValue = value.replace(/[^a-zA-Z\s]/g, "");
+      setFormData({ ...formData, [name]: alphaValue });
+      setErrors((prev) => ({ ...prev, [name]: "" }));
       return;
     }
 
@@ -82,9 +84,19 @@ const ContactSection = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.firstName.trim())
+    const nameRegex = /^[a-zA-Z\s]+$/;
+
+    if (!formData.firstName.trim()) {
       newErrors.firstName = "First name is required";
-    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+    } else if (!nameRegex.test(formData.firstName.trim())) {
+      newErrors.firstName = "First name should only contain letters";
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Last name is required";
+    } else if (!nameRegex.test(formData.lastName.trim())) {
+      newErrors.lastName = "Last name should only contain letters";
+    }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) newErrors.email = "Email is required";
     else if (!emailRegex.test(formData.email.trim()))
@@ -137,6 +149,7 @@ const ContactSection = () => {
           confirmButtonColor: "#222065",
         });
         setFormData({
+          countryCode: "+91",
           firstName: "",
           lastName: "",
           email: "",
