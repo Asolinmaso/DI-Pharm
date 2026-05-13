@@ -220,8 +220,8 @@ const Partners = () => {
           </defs>
 
           {pins.map((pin) => (
-            <g 
-              key={pin.id} 
+            <g
+              key={pin.id}
               transform={`translate(${pin.x}, ${pin.y})`}
               className={pin.id > 5 ? "desktop-hide" : ""}
             >
