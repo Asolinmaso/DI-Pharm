@@ -160,10 +160,10 @@ const Footer = () => {
             <h3 className="footer-heading">Legal</h3>
             <ul className="footer-links">
               <li>
-                <Link to={"/privacy"}>Privacy Policy</Link>
+                <a href="https://docs.google.com/document/d/1X4-CViESUsRXiNxNR3qRGkTXimY-lRC6giqDHyGcCjY/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
               </li>
               <li>
-                <Link to={"/terms"}>Terms & Conditions</Link>
+                <a href="https://docs.google.com/document/d/1X4-CViESUsRXiNxNR3qRGkTXimY-lRC6giqDHyGcCjY/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
               </li>
             </ul>
           </div>
