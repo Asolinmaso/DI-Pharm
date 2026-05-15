@@ -278,12 +278,10 @@ const CareerPage = () => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-
-    const payload = {
+    const submissionData = {
       name: formData.name,
       email: formData.email,
-      phone: formData.phone,
-      countryCode: formData.countryCode,
+      phone: `${formData.countryCode} ${formData.phone}`,
       role: formData.role,
       message: formData.message,
       fileName: selectedFile.name,
@@ -299,10 +297,14 @@ const CareerPage = () => {
         headers: {
           "Content-Type": "text/plain;charset=utf-8",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(submissionData),
       });
 
-      if (!response.ok) throw new Error("Network response was not ok");
+      const result = await response.json();
+      
+      if (!response.ok || result.result === "error") {
+        throw new Error(result.error || "Network response was not ok");
+      }
 
       // 🎉 Success popup
       Swal.fire({
@@ -325,11 +327,11 @@ const CareerPage = () => {
       setFileName("No file chosen");
       setErrors({});
     } catch (error) {
-      // ❌ Error popup
+      console.error(error);
       Swal.fire({
         icon: "error",
         title: "Submission Failed",
-        text: "Something went wrong. Please try again later.",
+        text: error.message || "Something went wrong. Please try again later.",
         confirmButtonColor: "#d33",
       });
     } finally {

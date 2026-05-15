@@ -4,7 +4,7 @@ const StayConected = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
     // Basic email regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,7 +22,32 @@ const StayConected = () => {
     setError("");
     console.log("Subscribed email:", email);
 
-    // TODO: API call here
+    try {
+      const response = await fetch(import.meta.env.VITE_GOOGLE_SHEET_CONTACT_URL, {
+        method: "POST",
+        mode: "cors",
+        credentials: "omit",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify({
+          name: "Newsletter Subscriber",
+          email: email,
+          subject: "Newsletter Subscription",
+          message: "User subscribed to newsletter",
+        }),
+      });
+
+      if (response.ok) {
+        setEmail("");
+        alert("Subscription successful!");
+      } else {
+        setError("Subscription failed. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("An error occurred. Please try again.");
+    }
   };
   return (
     <div className={styles.footer} id="contact">

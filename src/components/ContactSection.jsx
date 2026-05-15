@@ -127,8 +127,14 @@ const ContactSection = () => {
     e.preventDefault();
     const isValid = validate();
     if (!isValid) return;
-    console.log("Form submitted:", formData);
     setIsSubmitting(true);
+    const submissionData = {
+      name: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      phone: `${formData.countryCode} ${formData.phone}`,
+      subject: formData.subject,
+      message: formData.message,
+    };
 
     try {
       const response = await fetch(import.meta.env.VITE_GOOGLE_SHEET_CONTACT_URL, {
@@ -138,10 +144,12 @@ const ContactSection = () => {
         headers: {
           "Content-Type": "text/plain;charset=utf-8",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submissionData),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.result === "success") {
         Swal.fire({
           icon: "success",
           title: "Contact Submitted!",
@@ -170,7 +178,7 @@ const ContactSection = () => {
       Swal.fire({
         icon: "error",
         title: "Submission Failed",
-        text: "Something went wrong. Please try again later.",
+        text: error.message || "Something went wrong. Please try again later.",
         confirmButtonColor: "#d33",
       });
     } finally {
